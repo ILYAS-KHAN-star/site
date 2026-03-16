@@ -13,7 +13,6 @@
       min-height: 100vh;
       padding-bottom: 90px;
     }
-    /* Шапка */
     .header {
       position: sticky;
       top: 0;
@@ -30,7 +29,6 @@
       font-size: 20px;
       font-weight: 600;
     }
-    /* Список категорий */
     .categories {
       padding: 16px;
     }
@@ -65,7 +63,6 @@
       font-size: 24px;
       color: #c7c7cc;
     }
-    /* Нижняя навигация */
     .bottom-nav {
       position: fixed;
       bottom: 0;
@@ -93,7 +90,6 @@
     .nav-item.active,
     .nav-item:hover { color: #000000; }
     .nav-icon { font-size: 26px; line-height: 1; }
-    /* Иконка дома */
     .icon-home {
       position: relative;
       width: 26px;
@@ -118,7 +114,6 @@
       border: 2px solid currentColor;
       border-top: none;
     }
-    /* Иконка профиля */
     .icon-profile {
       position: relative;
       width: 26px;
@@ -142,14 +137,6 @@
       border: 2px solid currentColor;
       border-top: none;
       border-radius: 0 0 8px 8px;
-    }
-    /* Лёгкая анимация появления самой страницы (оставил, но её можно тоже убрать) */
-    body {
-      animation: slideIn 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
-    }
-    @keyframes slideIn {
-      from { transform: translateX(-30%); opacity: 0; }
-      to { transform: translateX(0); opacity: 1; }
     }
   </style>
 </head>
@@ -199,7 +186,6 @@
     <div class="arrow">›</div>
   </div>
 </div>
-<!-- Нижняя навигация -->
 <div class="bottom-nav">
   <div class="nav-item" id="homeNav">
     <div class="nav-icon icon-home">
@@ -213,7 +199,13 @@
     Каталог
   </div>
   <div class="nav-item" id="cartNav">
-    <div class="nav-icon">🛍</div>
+    <div class="nav-icon">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M6 2L3 6V20C3 20.5304 3.21071 21.0391 3.58579 21.4142C3.96086 21.7893 4.46957 22 5 22H19C19.5304 22 20.0391 21.7893 20.4142 21.4142C20.7893 21.0391 21 20.5304 21 20V6L18 2H6Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M3 6H21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M16 10C16 11.0609 15.5786 12.0783 14.8284 12.8284C14.0783 13.5786 13.0609 14 12 14C10.9391 14 9.92172 13.5786 9.17157 12.8284C8.42143 12.0783 8 11.0609 8 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
     Корзина
   </div>
   <div class="nav-item">
@@ -224,88 +216,8 @@
     Профиль
   </div>
 </div>
-<!-- Модальное окно корзины -->
-<div id="cartModal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.6); z-index:300; align-items:center; justify-content:center; padding:20px;">
-  <div style="background:#fff; border-radius:16px; width:100%; max-width:420px; max-height:90vh; overflow-y:auto; box-shadow:0 10px 40px rgba(0,0,0,0.3);">
-    <div style="padding:16px 20px; border-bottom:1px solid #eee; font-size:18px; font-weight:600; display:flex; justify-content:space-between; align-items:center;">
-      <span>Корзина</span>
-      <span onclick="document.getElementById('cartModal').style.display='none'" style="font-size:24px; cursor:pointer; color:#777;">×</span>
-    </div>
-    <div id="cartItems"></div>
-    <div id="cartTotal" style="padding:16px 20px; font-size:17px; font-weight:600; border-top:1px solid #eee; display:flex; justify-content:space-between;"></div>
-    <button id="checkoutBtn" style="margin:16px 20px; padding:14px; background:#000; color:#fff; border:none; border-radius:10px; font-size:16px; font-weight:600; cursor:pointer; width:calc(100% - 40px);">Оформить заказ</button>
-  </div>
-</div>
 
 <script>
-// Корзина (без изменений)
-function getCart() { return JSON.parse(localStorage.getItem('cart') || '[]'); }
-function saveCart(cart) { localStorage.setItem('cart', JSON.stringify(cart)); }
-
-function renderCart() {
-  const cart = getCart();
-  const itemsEl = document.getElementById('cartItems');
-  const totalEl = document.getElementById('cartTotal');
-  const btn = document.getElementById('checkoutBtn');
-  itemsEl.innerHTML = '';
-  if (cart.length === 0) {
-    itemsEl.innerHTML = '<div style="padding:40px 20px; text-align:center; color:#888; font-size:16px;">Корзина пуста</div>';
-    totalEl.innerHTML = '<strong>Итого: 0 ₽</strong>';
-    btn.style.display = 'none';
-    return;
-  }
-  btn.style.display = 'block';
-  let total = 0;
-  cart.forEach(item => {
-    const sum = item.price * item.qty;
-    total += sum;
-    const div = document.createElement('div');
-    div.style.cssText = 'display:flex; align-items:center; padding:12px 20px; border-bottom:1px solid #eee; gap:12px;';
-    div.innerHTML = `
-      <img src="static/images/${item.image}" alt="${item.name}" style="width:60px; height:60px; object-fit:contain; border-radius:8px; background:#f8f8f8;">
-      <div style="flex:1;">
-        <div style="font-size:15px; font-weight:500;">${item.name}</div>
-        <div style="font-size:14px; color:#555; margin-top:4px;">${item.price.toLocaleString('ru-RU')} ₽ × ${item.qty}</div>
-        <div style="font-size:13px; color:#777;">Сумма: ${sum.toLocaleString('ru-RU')} ₽</div>
-      </div>
-      <button class="remove-btn" data-id="${item.id}" style="background:#000; color:#fff; border:none; padding:6px 12px; border-radius:6px; font-size:13px; cursor:pointer; white-space:nowrap;">Удалить</button>
-    `;
-    itemsEl.appendChild(div);
-  });
-  totalEl.innerHTML = `<strong>Итого: ${total.toLocaleString('ru-RU')} ₽</strong>`;
-  document.querySelectorAll('.remove-btn').forEach(btn => {
-    btn.onclick = () => {
-      let cart = getCart();
-      cart = cart.filter(item => item.id !== btn.dataset.id);
-      saveCart(cart);
-      renderCart();
-    };
-  });
-}
-
-document.getElementById('cartNav').onclick = () => {
-  renderCart();
-  document.getElementById('cartModal').style.display = 'flex';
-};
-
-document.getElementById('checkoutBtn').onclick = () => {
-  alert("Переход к оформлению заказа");
-};
-
-document.getElementById('cartModal').onclick = e => {
-  if (e.target === document.getElementById('cartModal')) {
-    document.getElementById('cartModal').style.display = 'none';
-  }
-};
-
-// Переход на главную — мгновенный, без анимации
-const homeNav = document.getElementById('homeNav');
-homeNav.onclick = function(e) {
-  e.preventDefault();
-  window.location.href = 'index.html';
-};
-
-// Переход в категорию — мгновенный, без анимации и без шторки
 document.querySelectorAll('.category-item').forEach(item => {
   item.addEventListener('click', function() {
     const cat = this.dataset.category;
@@ -313,6 +225,11 @@ document.querySelectorAll('.category-item').forEach(item => {
     window.location.href = `category.html?cat=${cat}`;
   });
 });
+
+document.getElementById('homeNav').onclick = () => {
+  window.location.href = 'index.html';
+};
 </script>
 </body>
 </html>
+      
