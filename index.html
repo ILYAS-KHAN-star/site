@@ -907,6 +907,19 @@ if (catalogNav) {
 favNav.onclick = () => {
   favSection.scrollIntoView({ behavior: 'smooth' });
 };
+// Показать/скрыть меню фильтра
+filterBtn.addEventListener('click', function(e) {
+    e.stopPropagation();                    // чтобы клик не закрывал сразу
+    filterMenu.style.display = 
+        filterMenu.style.display === 'block' ? 'none' : 'block';
+});
+
+// Закрываем меню при клике вне его
+document.addEventListener('click', function(e) {
+    if (!filterBtn.contains(e.target) && !filterMenu.contains(e.target)) {
+        filterMenu.style.display = 'none';
+    }
+});
 
 // Инициализация
 updateContent();
