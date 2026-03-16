@@ -4,12 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Детали ножа</title>
-
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-
   <style>
     * { box-sizing: border-box; }
-
     body {
       margin: 0;
       background: #ffffff;
@@ -18,20 +15,17 @@
       min-height: 100vh;
       overflow-x: hidden;
     }
-
     .container {
       max-width: 1250px;
       margin: auto;
       padding: 40px 30px 80px;
     }
-
     .top-bar {
       display: flex;
       justify-content: space-between;
       align-items: center;
       margin-bottom: 50px;
     }
-
     .back-btn {
       padding: 12px 26px;
       border: 2px solid #000;
@@ -44,16 +38,13 @@
       cursor: pointer;
       font-family: inherit;
     }
-
     .back-btn:hover {
       background: #111;
     }
-
     .social {
       display: flex;
       gap: 14px;
     }
-
     .social a {
       width: 44px;
       height: 44px;
@@ -65,28 +56,23 @@
       justify-content: center;
       transition: .3s;
     }
-
     .social a:hover {
       background: #111;
     }
-
     .social svg {
       width: 18px;
       height: 18px;
     }
-
     .product {
       display: flex;
       gap: 70px;
       align-items: flex-start;
     }
-
     .gallery {
       flex: 1 1 520px;
       padding-right: 60px;
       border-right: 1px solid #e6e6e6;
     }
-
     .main-image-wrapper {
       background: #ffffff;
       border: 2px solid #ffffff;
@@ -98,20 +84,17 @@
       max-width: 480px;
       margin: auto;
     }
-
     .main-image {
       max-width: 100%;
       max-height: 420px;
       object-fit: contain;
     }
-
     .thumbnails {
       display: flex;
       gap: 12px;
       margin-top: 22px;
       justify-content: center;
     }
-
     .thumb {
       width: 70px;
       height: 70px;
@@ -120,42 +103,35 @@
       border: 2px solid #fff;
       transition: .2s;
     }
-
     .thumb:hover,
     .thumb.active {
       border: 2px solid #000;
     }
-
     .info {
       flex: 1 1 450px;
     }
-
     .title {
       font-family: 'Playfair Display', serif;
       font-size: 40px;
       font-weight: 600;
       margin: 0 0 18px;
     }
-
     .price {
       font-size: 32px;
       font-weight: 600;
       margin-bottom: 35px;
     }
-
     .specs-card {
       border-top: 1px solid #000;
       border-bottom: 1px solid #000;
       padding: 25px 0;
       margin-bottom: 30px;
     }
-
     .specs-title {
       font-weight: 600;
       margin-bottom: 20px;
       letter-spacing: 1px;
     }
-
     .spec-row {
       display: flex;
       justify-content: space-between;
@@ -163,33 +139,27 @@
       border-bottom: 1px solid #eee;
       font-size: 15px;
     }
-
     .spec-row:last-child {
       border-bottom: none;
     }
-
     .spec-label {
       color: #666;
     }
-
     .spec-value {
       font-weight: 500;
     }
-
     .description {
       font-size: 15px;
       line-height: 1.7;
       margin-bottom: 40px;
       color: #333;
     }
-
     .actions {
       display: flex;
       gap: 30px;
       align-items: center;
       flex-wrap: wrap;
     }
-
     .quantity-row {
       display: flex;
       align-items: center;
@@ -203,11 +173,9 @@
       box-shadow: 0 4px 12px rgba(0,0,0,0.08);
       transition: box-shadow 0.3s ease;
     }
-
     .quantity-row:hover {
       box-shadow: 0 6px 20px rgba(0,0,0,0.12);
     }
-
     .qty-btn {
       width: 46px;
       height: 46px;
@@ -223,17 +191,14 @@
       justify-content: center;
       transition: all 0.2s ease, transform 0.1s ease;
     }
-
     .qty-btn:hover {
       background: #111;
       transform: scale(1.05);
     }
-
     .qty-btn:active {
       transform: scale(0.95);
       box-shadow: inset 0 2px 6px rgba(0,0,0,0.25);
     }
-
     .qty-value {
       flex: 1;
       text-align: center;
@@ -243,7 +208,6 @@
       color: #111;
       user-select: none;
     }
-
     .add-to-cart-btn {
       flex: 1;
       min-width: 280px;
@@ -257,11 +221,9 @@
       cursor: pointer;
       transition: .3s;
     }
-
     .add-to-cart-btn:hover {
       background: #111;
     }
-
     .modal {
       display: none;
       position: fixed;
@@ -271,17 +233,14 @@
       align-items: center;
       justify-content: center;
     }
-
     .modal-content-wrapper {
       position: relative;
       max-width: 95%;
     }
-
     .modal-image {
       max-width: 100%;
       max-height: 90vh;
     }
-
     .modal-close {
       position: absolute;
       top: -50px;
@@ -295,7 +254,6 @@
       font-size: 20px;
       cursor: pointer;
     }
-
     @media (max-width: 900px) {
       .product {
         flex-direction: column;
@@ -331,7 +289,6 @@
   </div>
 
   <div class="product">
-
     <div class="gallery">
       <div class="main-image-wrapper" id="mainImageWrapper">
         <img id="mainImage" class="main-image" src="" alt="">
@@ -361,7 +318,6 @@
         </div>
         <button class="add-to-cart-btn" id="addToCart">ДОБАВИТЬ В КОРЗИНУ</button>
       </div>
-
     </div>
   </div>
 </div>
@@ -374,7 +330,7 @@
 </div>
 
 <script>
-  // ПОЛНЫЙ МАССИВ ТОВАРОВ — ВСЁ БЕЗ СОКРАЩЕНИЙ
+  // ПОЛНЫЙ МАССИВ ТОВАРОВ
   const knives = [
     {id:"knife1", name:"Ката", year:2022, material:"Сталь", price:2500, description:"Традиционная японская катана.", image:"a.jpg", bladeLengthCm:75, bladeWidthMm:35},
     {id:"knife2", name:"Танто", year:2023, material:"Углерод", price:1800, description:"Компактный боевой нож.", image:"b.jpg", bladeLengthCm:30, bladeWidthMm:28},
@@ -418,15 +374,15 @@
     {id:"knife46", name:"Резак", year:2023, material:"Керамика", price:2500, description:"Коллекционный резак.", image:"13.jpg", bladeLengthCm:12, bladeWidthMm:28},
     {id:"knife47", name:"Правша", year:2021, material:"Сталь", price:3100, description:"Нож для правшей.", image:"14.jpg", bladeLengthCm:14, bladeWidthMm:32},
     {id:"knife48", name:"Левша", year:2022, material:"Сталь", price:2500, description:"Нож для левшей.", image:"15.jpg", bladeLengthCm:14, bladeWidthMm:32},
-    {id:"k1",  name:"Doppler Phase 4", price:1850, oldPrice:210000, image:"k1.jpg",    category:"kerambits"},
-    {id:"k2",  name:"Gamma Doppler",  price:2380, oldPrice:265000, image:"k2.jpg",    category:"kerambits"},
-    {id:"k3",  name:"Lore", price:2999,  oldPrice:125000, image:"k3.jpg",    category:"kerambits"},
-    {id:"k4",  name:"Crimson Web", price:1880, oldPrice:null,   image:"k4.jpg",    category:"kerambits"},
-    {id:"k5",  name:"Fortran", price:1420, oldPrice:null,   image:"k5.jpg",    category:"kerambits"},
-    {id:"k6",  name:"Atilla",  price:1600, oldPrice:null,   image:"k6.jpg",    category:"kerambits"},
-    {id:"k7",  name:"Magellan", price:142000, oldPrice:null,   image:"k7.jpg",    category:"kerambits"},
-    {id:"k8",  name:"Tiki Tiki", price:142000, oldPrice:null,   image:"k8.jpg",    category:"kerambits"},
-    {id:"k9",  name:"Haisse", price:1700, oldPrice:null,   image:"k9.jpg",    category:"kerambits"},
+    {id:"k1",  name:"Doppler Phase 4", price:1850, oldPrice:210000, image:"k1.jpg", category:"kerambits"},
+    {id:"k2",  name:"Gamma Doppler",  price:2380, oldPrice:265000, image:"k2.jpg", category:"kerambits"},
+    {id:"k3",  name:"Lore", price:2999,  oldPrice:125000, image:"k3.jpg", category:"kerambits"},
+    {id:"k4",  name:"Crimson Web", price:1880, oldPrice:null,   image:"k4.jpg", category:"kerambits"},
+    {id:"k5",  name:"Fortran", price:1420, oldPrice:null,   image:"k5.jpg", category:"kerambits"},
+    {id:"k6",  name:"Atilla",  price:1600, oldPrice:null,   image:"k6.jpg", category:"kerambits"},
+    {id:"k7",  name:"Magellan", price:142000, oldPrice:null,   image:"k7.jpg", category:"kerambits"},
+    {id:"k8",  name:"Tiki Tiki", price:142000, oldPrice:null,   image:"k8.jpg", category:"kerambits"},
+    {id:"k9",  name:"Haisse", price:1700, oldPrice:null,   image:"k9.jpg", category:"kerambits"},
     {id:"k10", name:"Bloom", price:1420, oldPrice:null,   image:"k10.jpg",   category:"kerambits"},
     {id:"k11", name:"Usada", price:2200, oldPrice:null,   image:"k11.jpg",   category:"kerambits"},
     {id:"k12", name:"Mazrani", price:1500, oldPrice:null,   image:"k12.jpg",   category:"kerambits"},
@@ -494,7 +450,6 @@
   if (!knife) {
     document.body.innerHTML = '<h1 style="text-align:center; padding:100px 20px;">Товар не найден</h1>';
   } else {
-    // Заполняем данные
     document.getElementById("name").textContent = knife.name;
     document.getElementById("price").textContent = knife.price.toLocaleString('ru-RU');
     document.getElementById("year").textContent = knife.year || "—";
@@ -503,13 +458,11 @@
     document.getElementById("bladeWidth").textContent = knife.bladeWidthMm ? `${knife.bladeWidthMm} мм` : "—";
     document.getElementById("description").textContent = knife.description || "Описание отсутствует.";
 
-    // Изображение
     const mainImg = document.getElementById("mainImage");
     const thumbs = document.getElementById("thumbnails");
     mainImg.src = `static/images/${knife.image}`;
     mainImg.alt = knife.name;
 
-    // Пока одно изображение (можно расширить позже)
     const thumb = document.createElement("img");
     thumb.src = mainImg.src;
     thumb.className = "thumb active";
@@ -520,13 +473,11 @@
     };
     thumbs.appendChild(thumb);
 
-    // Количество
     let qty = 1;
     const qtyEl = document.getElementById("qty");
     document.querySelector(".minus").onclick = () => { if (qty > 1) { qty--; qtyEl.textContent = qty; } };
     document.querySelector(".plus").onclick = () => { qty++; qtyEl.textContent = qty; };
 
-    // Добавление в корзину
     document.getElementById("addToCart").onclick = () => {
       addToCart(id, qty);
       const btn = document.getElementById("addToCart");
@@ -539,7 +490,6 @@
       }, 1400);
     };
 
-    // Зум фото
     const modal = document.getElementById("imageModal");
     const modalImg = document.getElementById("modalImage");
     const close = document.querySelector(".modal-close");
@@ -553,10 +503,21 @@
     modal.onclick = e => { if (e.target === modal) modal.style.display = "none"; };
   }
 
-  // Кнопка назад — без анимации
+  // ─── Кнопка «К товарам» — ВАРИАНТ B ───────────────────────────────────────
   document.getElementById("backToPrev")?.addEventListener("click", function(e) {
     e.preventDefault();
-    history.back();
+    
+    // Если есть реферер и он отличается от текущей страницы
+    if (document.referrer && document.referrer !== window.location.href) {
+      history.back();
+    } else {
+      // Нет истории — переходим на главную страницу каталога
+      window.location.href = "index.html";   // ← ИЗМЕНИТЕ НА РЕАЛЬНОЕ ИМЯ ФАЙЛА КАТАЛОГА
+      // Альтернативы:
+      // window.location.href = "/";
+      // window.location.href = "catalog.html";
+      // window.location.href = "../index.html";
+    }
   });
 </script>
 
