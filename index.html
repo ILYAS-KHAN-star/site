@@ -1,0 +1,1091 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <title>KNIVES A MILLION</title>
+
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #ffffff;
+      color: #111111;
+      min-height: 100vh;
+      padding-bottom: 80px;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* LUXURY HEADER */
+    .main-header {
+      background:#000;
+      color:#fff;
+      padding:28px 20px 26px;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      border-bottom:1px solid #111;
+    }
+
+    .logo-container {
+      text-align:center;
+      position:relative;
+    }
+
+    .logo-title {
+      font-size:20px;
+      letter-spacing:6px;
+      font-weight:600;
+    }
+
+    .logo-sub {
+      font-size:11px;
+      letter-spacing:4px;
+      opacity:0.6;
+      margin-top:6px;
+    }
+
+    .logo-line {
+      width:60px;
+      height:1px;
+      background:#fff;
+      margin:14px auto 0;
+      opacity:0.6;
+    }
+
+    .search-container {
+      position: sticky;
+      top: 0;
+      background: #ffffff;
+      padding: 12px;
+      border-bottom: 1px solid #e0e0e0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+    }
+
+    #searchInput {
+      flex: 1;
+      padding: 10px 14px;
+      border: 1px solid #d0d0d0;
+      border-radius: 10px;
+      font-size: 16px;
+      background: #f8f8f8;
+      color: #222;
+    }
+
+    #searchInput::placeholder { color: #999; }
+
+    #filterBtn {
+      background: #111;
+      color: #fff;
+      border: none;
+      padding: 11px 16px;
+      border-radius: 10px;
+      font-weight: 500;
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    #filterBtn.active {
+      background: #0a0a0a !important;
+      color: white !important;
+      box-shadow: 0 0 0 2px rgba(45,93,163,0.4);
+    }
+
+    .filter-menu {
+      display: none;
+      position: absolute;
+      top: 58px;
+      right: 12px;
+      background: #111111;
+      color: #e0e0e0;
+      border: 1px solid #333;
+      border-radius: 12px;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.65);
+      z-index: 110;
+      min-width: 280px;
+      overflow: hidden;
+      padding-bottom: 8px;
+    }
+
+    .filter-header {
+      padding: 14px 18px;
+      font-size: 16px;
+      font-weight: 600;
+      color: #ffffff;
+      border-bottom: 1px solid #222;
+      background: #1a1a1a;
+    }
+
+    .range-inputs {
+      display: flex;
+      gap: 12px;
+      padding: 16px 18px 8px;
+    }
+
+    .input-group {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      position: relative;
+    }
+
+    .input-group label {
+      font-size: 13px;
+      color: #aaa;
+    }
+
+    .input-group input {
+      background: #1c1c1c;
+      border: 1px solid #444;
+      border-radius: 8px;
+      color: #eee;
+      padding: 10px 36px 10px 12px;
+      font-size: 16px;
+      width: 100%;
+    }
+
+    .input-group input:focus {
+      outline: none;
+      border-color: #666;
+      box-shadow: 0 0 0 2px rgba(100,100,100,0.3);
+    }
+
+    .input-group input.invalid {
+      border-color: #c94d4d !important;
+      background: #2a1a1a;
+    }
+
+    .input-group input::-webkit-outer-spin-button,
+    .input-group input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    .rub {
+      position: absolute;
+      right: 12px;
+      top: 36px;
+      color: #777;
+      font-size: 15px;
+      pointer-events: none;
+    }
+
+    .filter-actions {
+      display: flex;
+      gap: 10px;
+      padding: 0 18px 14px;
+    }
+
+    .action-btn {
+      flex: 1;
+      padding: 12px;
+      border: none;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .apply {
+      background: #000000;
+      color: #ffffff;
+    }
+
+    .apply:hover {
+      background: #222222;
+      box-shadow: 0 0 0 2px rgba(255,255,255,0.08);
+    }
+
+    .reset {
+      background: #333333;
+      color: #cccccc;
+    }
+
+    .reset:hover {
+      background: #444444;
+    }
+
+    .quick-ranges {
+      padding: 0 18px 10px;
+      border-top: 1px solid #222;
+      margin-top: 6px;
+    }
+
+    .quick-item {
+      padding: 12px 0;
+      font-size: 14.5px;
+      color: #bbb;
+      cursor: pointer;
+      transition: color 0.15s;
+    }
+
+    .quick-item:hover {
+      color: #eee;
+    }
+
+    .section-title {
+      padding: 20px 14px 10px;
+      font-size: 19px;
+      font-weight: 600;
+      color: #000;
+      background: #fff;
+    }
+
+    .horizontal-scroll {
+      display: flex;
+      overflow-x: auto;
+      gap: 14px;
+      padding: 0 14px 20px;
+      scroll-snap-type: x proximity;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .horizontal-scroll::-webkit-scrollbar { display: none; }
+
+    .product-card {
+      flex: 0 0 164px;
+      width: 164px;
+      background: #fff;
+      border: 1px solid #e8e8e8;
+      border-radius: 14px;
+      overflow: hidden;
+      position: relative;
+      text-align: center;
+      padding: 12px 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      scroll-snap-align: start;
+      cursor: pointer;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .product-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+    }
+
+    .product-card img {
+      width: 100%;
+      height: 140px;
+      object-fit: contain;
+      margin-bottom: 10px;
+    }
+
+    .favorite {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-size: 22px;
+      color: #222;
+      cursor: pointer;
+      transition: color 0.2s, transform 0.15s;
+      z-index: 2;
+    }
+
+    .favorite.active {
+      color: #000000;
+      transform: scale(1.15);
+    }
+
+    .product-name {
+      font-size: 13.5px;
+      line-height: 1.35;
+      margin-bottom: 8px;
+      color: #111;
+      font-weight: 400;
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .price-block {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3px;
+      min-height: 46px;
+      justify-content: flex-end;
+      margin-top: 4px;
+    }
+
+    .current-price {
+      font-size: 16px;
+      font-weight: 600;
+      color: #000;
+    }
+
+    .old-price {
+      font-size: 13px;
+      color: #888;
+      text-decoration: line-through;
+    }
+
+    .page-transition-wrapper {
+      position: fixed;
+      inset: 0;
+      background: white;
+      z-index: 9998;
+      transform: translateX(100%);
+      transition: transform 0.55s cubic-bezier(0.32, 0.72, 0, 1);
+      will-change: transform;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .page-transition-wrapper.active {
+      transform: translateX(0);
+      pointer-events: auto;
+    }
+
+    .page-transition-wrapper .loading-content {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      color: #555;
+      opacity: 0;
+      transition: opacity 0.4s ease 0.15s;
+    }
+
+    .page-transition-wrapper.active .loading-content {
+      opacity: 1;
+    }
+
+    .cart-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.6);
+      z-index: 300;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .cart-content {
+      background: #fff;
+      border-radius: 16px;
+      width: 100%;
+      max-width: 420px;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+    }
+
+    .cart-header {
+      padding: 16px 20px;
+      border-bottom: 1px solid #eee;
+      font-size: 18px;
+      font-weight: 600;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .cart-close {
+      font-size: 24px;
+      cursor: pointer;
+      color: #777;
+    }
+
+    .cart-item {
+      display: flex;
+      align-items: center;
+      padding: 12px 20px;
+      border-bottom: 1px solid #eee;
+      gap: 12px;
+    }
+
+    .cart-item img {
+      width: 60px;
+      height: 60px;
+      object-fit: contain;
+      border-radius: 8px;
+      background: #f8f8f8;
+    }
+
+    .cart-item-info {
+      flex: 1;
+    }
+
+    .cart-item-name {
+      font-size: 15px;
+      font-weight: 500;
+    }
+
+    .cart-item-price {
+      font-size: 14px;
+      color: #555;
+      margin-top: 4px;
+    }
+
+    .cart-item-qty {
+      font-size: 13px;
+      color: #777;
+    }
+
+    .cart-item-remove {
+      background: #000;
+      color: #fff;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 13px;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .cart-total {
+      padding: 16px 20px;
+      font-size: 17px;
+      font-weight: 600;
+      border-top: 1px solid #eee;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .cart-checkout {
+      margin: 16px 20px;
+      padding: 14px;
+      background: #000;
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      width: calc(100% - 40px);
+    }
+
+    .cart-empty {
+      padding: 40px 20px;
+      text-align: center;
+      color: #888;
+      font-size: 16px;
+    }
+
+    .fav-empty {
+      padding: 40px 20px;
+      text-align: center;
+      color: #888;
+      font-size: 16px;
+      display: none;
+    }
+
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: #ffffff;
+      border-top: 1px solid #e0e0e0;
+      display: flex;
+      height: 74px;
+      z-index: 200;
+      box-shadow: 0 -2px 10px rgba(0,0,0,0.06);
+    }
+
+    .nav-item {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      color: #777777;
+      gap: 4px;
+      transition: color 0.2s;
+      cursor: pointer;
+    }
+
+    .nav-item.active,
+    .nav-item:hover { color: #000000; }
+
+    .nav-icon { font-size: 26px; line-height: 1; }
+
+    .icon-home {
+      position: relative;
+      width: 26px;
+      height: 26px;
+    }
+    .icon-home .roof {
+      position: absolute;
+      top: 2px;
+      left: 3px;
+      width: 20px;
+      height: 0;
+      border-left: 10px solid transparent;
+      border-right: 10px solid transparent;
+      border-bottom: 10px solid currentColor;
+    }
+    .icon-home .walls {
+      position: absolute;
+      bottom: 2px;
+      left: 5px;
+      width: 16px;
+      height: 14px;
+      border: 2px solid currentColor;
+      border-top: none;
+    }
+
+    .icon-profile {
+      position: relative;
+      width: 26px;
+      height: 26px;
+    }
+    .icon-profile .head {
+      position: absolute;
+      top: 2px;
+      left: 8px;
+      width: 10px;
+      height: 10px;
+      border: 2px solid currentColor;
+      border-radius: 50%;
+    }
+    .icon-profile .body {
+      position: absolute;
+      bottom: 2px;
+      left: 5px;
+      width: 16px;
+      height: 14px;
+      border: 2px solid currentColor;
+      border-top: none;
+      border-radius: 0 0 8px 8px;
+    }
+  </style>
+</head>
+<body>
+
+<!-- LUXURY HEADER -->
+<div class="main-header">
+  <div class="logo-container">
+    <div class="logo-title">KNIVES A MILLION</div>
+    <div class="logo-sub">PREMIUM QUALITY</div>
+    <div class="logo-line"></div>
+  </div>
+</div>
+
+<div class="search-container">
+  <input id="searchInput" type="text" placeholder="Поиск..." />
+  <button id="filterBtn">Фильтр</button>
+  
+  <div id="filterMenu" class="filter-menu">
+    <div class="filter-header">Диапазон цен</div>
+    
+    <div class="range-inputs">
+      <div class="input-group">
+        <label>От</label>
+        <input type="text" id="minPriceInput" placeholder="0" />
+        <span class="rub">₽</span>
+      </div>
+      
+      <div class="input-group">
+        <label>До</label>
+        <input type="text" id="maxPriceInput" placeholder="∞" />
+        <span class="rub">₽</span>
+      </div>
+    </div>
+    
+    <div class="filter-actions">
+      <button id="applyRangeBtn" class="action-btn apply">Применить</button>
+      <button id="resetRangeBtn" class="action-btn reset">Сбросить</button>
+    </div>
+    
+    <div class="quick-ranges">
+      <div class="quick-item" data-min="0" data-max="500">До 500 ₽</div>
+      <div class="quick-item" data-min="500" data-max="1500">500 – 1 500 ₽</div>
+      <div class="quick-item" data-min="1500" data-max="4000">1 500 – 4 000 ₽</div>
+      <div class="quick-item" data-min="4000" data-max="10000">4 000 – 10 000 ₽</div>
+      <div class="quick-item" data-min="10000" data-max="999999">От 10 000 ₽</div>
+    </div>
+  </div>
+</div>
+
+<div class="section-title">Хиты продаж</div>
+<div class="horizontal-scroll" id="hitsScroll"></div>
+
+<div class="section-title">Новинки</div>
+<div class="horizontal-scroll" id="newScroll"></div>
+
+<div class="section-title">Популярные модели</div>
+<div class="horizontal-scroll" id="popularScroll"></div>
+
+<div class="section-title">Тактические ножи</div>
+<div class="horizontal-scroll" id="tacticalScroll"></div>
+
+<div class="section-title">Коллекционные экземпляры</div>
+<div class="horizontal-scroll" id="collectScroll"></div>
+
+<div id="favoritesSection">
+  <div class="section-title">Избранное</div>
+  <div class="horizontal-scroll" id="favoritesScroll"></div>
+  <div id="favEmpty" class="fav-empty">В избранном пока ничего нет</div>
+</div>
+
+<!-- Попап корзины -->
+<div id="cartModal" class="cart-modal">
+  <div class="cart-content">
+    <div class="cart-header">
+      <span>Корзина</span>
+      <span class="cart-close">×</span>
+    </div>
+    <div id="cartItems"></div>
+    <div id="cartTotal" class="cart-total"></div>
+    <button id="checkoutBtn" class="cart-checkout">Оформить заказ</button>
+  </div>
+</div>
+
+<div class="bottom-nav">
+  <div class="nav-item active">
+    <div class="nav-icon icon-home">
+      <div class="roof"></div>
+      <div class="walls"></div>
+    </div>
+    Главная
+  </div>
+  <div class="nav-item" id="catalogNav">
+    <div class="nav-icon">≡</div>
+    Каталог
+  </div>
+  <div class="nav-item" id="favNav">
+    <div class="nav-icon">♥</div>
+    Избранное
+  </div>
+  <div class="nav-item" id="cartNav">
+    <div class="nav-icon">🛍</div>
+    Корзина
+  </div>
+  <div class="nav-item">
+    <div class="nav-icon icon-profile">
+      <div class="head"></div>
+      <div class="body"></div>
+    </div>
+    Профиль
+  </div>
+</div>
+
+<!-- Переходная панель -->
+<div id="pageTransition" class="page-transition-wrapper">
+  <div class="loading-content">Загрузка...</div>
+</div>
+
+<script>
+const knives = [
+  {id:"knife1", name:"Ката", price:2500, oldPrice:3200, image:"a.jpg", category:"популярная"},
+  {id:"knife2", name:"Танто", price:1800, oldPrice:2400, image:"b.jpg", category:"хит"},
+  {id:"knife3", name:"Финка", price:2000, oldPrice:null, image:"c.jpg", category:"популярная"},
+  {id:"knife4", name:"Керамбит", price:2200, oldPrice:2900, image:"d.jpg", category:"тактический"},
+  {id:"knife5", name:"Штык-нож", price:3000, oldPrice:3800, image:"e.jpg", category:"тактический"},
+  {id:"knife6", name:"Боуи", price:2800, oldPrice:null, image:"f.jpg", category:"популярная"},
+  {id:"knife7", name:"Сай", price:1500, oldPrice:1890, image:"h.jpg", category:"коллекционный"},
+  {id:"knife8", name:"Широбан", price:2600, oldPrice:3400, image:"g.jpg", category:"новинка"},
+  {id:"knife9", name:"Рейнджер", price:2400, oldPrice:null, image:"h.jpg", category:"тактический"},
+  {id:"knife10", name:"Керамбит Pro", price:3200, oldPrice:4200, image:"i.jpg", category:"хит"},
+  {id:"knife11", name:"Фалькон", price:2100, oldPrice:2700, image:"j.jpg", category:"популярная"},
+  {id:"knife12", name:"Астра", price:2300, oldPrice:null, image:"k.jpg", category:"популярная"},
+  {id:"knife13", name:"Рапира", price:1900, oldPrice:2500, image:"l.jpg", category:"коллекционный"},
+  {id:"knife14", name:"Викинг", price:2700, oldPrice:3500, image:"m.jpg", category:"популярная"},
+  {id:"knife15", name:"Тандер", price:3100, oldPrice:null, image:"n.jpg", category:"новинка"},
+  {id:"knife16", name:"Акула", price:2200, oldPrice:2800, image:"o.jpg", category:"тактический"},
+  {id:"knife17", name:"Барс", price:2600, oldPrice:null, image:"p.jpg", category:"популярная"},
+  {id:"knife18", name:"Тигр", price:2800, oldPrice:3600, image:"q.jpg", category:"хит"},
+  {id:"knife19", name:"Сокол", price:2400, oldPrice:null, image:"r.jpg", category:"новинка"},
+  {id:"knife20", name:"Феникс", price:3200, oldPrice:3990, image:"s.jpg", category:"коллекционный"},
+  {id:"knife21", name:"Дракон", price:3000, oldPrice:3900, image:"u.jpg", category:"хит"},
+  {id:"knife22", name:"Орёл", price:2300, oldPrice:null, image:"v.jpg", category:"популярная"},
+  {id:"knife23", name:"Пантера", price:2700, oldPrice:3400, image:"w.jpg", category:"тактический"},
+  {id:"knife24", name:"Волк", price:2500, oldPrice:3200, image:"x.jpg", category:"коллекционный"},
+  {id:"knife25", name:"Гепард", price:3100, oldPrice:null, image:"y.jpg", category:"новинка"},
+  {id:"knife32", name:"Койот", price:2500, oldPrice:3100, image:"z.jpg", category:"тактический"},
+  {id:"knife33", name:"Медведь", price:3000, oldPrice:3800, image:"k.jpg", category:"хит"},
+  {id:"knife34", name:"Ларс", price:2600, oldPrice:null, image:"1.jpg", category:"популярная"},
+  {id:"knife35", name:"Зигр", price:2800, oldPrice:3600, image:"2.jpg", category:"хит"},
+  {id:"knife36", name:"Токол", price:2400, oldPrice:null, image:"3.jpg", category:"новинка"},
+  {id:"knife37", name:"Зеникс", price:3200, oldPrice:3990, image:"4.jpg", category:"коллекционный"},
+  {id:"knife38", name:"Терракон", price:3000, oldPrice:3900, image:"5.jpg", category:"хит"},
+  {id:"knife39", name:"Порёл", price:2300, oldPrice:null, image:"6.jpg", category:"популярная"},
+  {id:"knife40", name:"Шантера", price:2700, oldPrice:3400, image:"7.jpg", category:"тактический"},
+  {id:"knife41", name:"Холк", price:2500, oldPrice:3200, image:"8.jpg", category:"коллекционный"},
+  {id:"knife42", name:"Пепард", price:3100, oldPrice:null, image:"9.jpg", category:"новинка"},
+  {id:"knife43", name:"Мойот", price:2500, oldPrice:3100, image:"10.jpg", category:"тактический"},
+  {id:"knife44", name:"Чедведь", price:3000, oldPrice:3800, image:"11.jpg", category:"хит"},
+  {id:"knife45", name:"Математик", price:2700, oldPrice:3400, image:"12.jpg", category:"тактический"},
+  {id:"knife46", name:"Резак", price:2500, oldPrice:3200, image:"13.jpg", category:"коллекционный"},
+  {id:"knife47", name:"Правша", price:3100, oldPrice:null, image:"14.jpg", category:"новинка"},
+  {id:"knife48", name:"Левша", price:2500, oldPrice:3100, image:"15.jpg", category:"новинка"},
+  {id:"k1",  name:"Doppler Phase 4", price:185000, oldPrice:210000, image:"k1.jpg",    category:"kerambits"},
+  {id:"k2",  name:"Gamma Doppler",  price:238000, oldPrice:265000, image:"k2.jpg",    category:"kerambits"},
+  {id:"k3",  name:"Lore", price:98000,  oldPrice:125000, image:"k3.jpg",    category:"kerambits"},
+  {id:"k4",  name:"Crimson Web", price:142000, oldPrice:null,   image:"k4.jpg",    category:"kerambits"},
+  {id:"k5",  name:"Fortran", price:142000, oldPrice:null,   image:"k5.jpg",    category:"kerambits"},
+  {id:"k6",  name:"Atilla",  price:142000, oldPrice:null,   image:"k6.jpg",    category:"kerambits"},
+  {id:"k7",  name:"Magellan", price:142000, oldPrice:null,   image:"k7.jpg",    category:"kerambits"},
+  {id:"k8",  name:"Tiki Tiki", price:142000, oldPrice:null,   image:"k8.jpg",    category:"kerambits"},
+  {id:"k9",  name:"Haisse", price:142000, oldPrice:null,   image:"k9.jpg",    category:"kerambits"},
+  {id:"k10", name:"Bloom", price:142000, oldPrice:null,   image:"k10.jpg",   category:"kerambits"},
+  {id:"k11", name:"Usada", price:142000, oldPrice:null,   image:"k11.jpg",   category:"kerambits"},
+  {id:"k12", name:"Mazrani", price:142000, oldPrice:null,   image:"k12.jpg",   category:"kerambits"},
+  {id:"kn1", name:"Шеф-нож Tojiro DP 210 мм",      price:7200,   oldPrice:8900,   image:"e.jpg",    category:"kitchen"},
+  {id:"kn2", name:"Сантоку Kai Shun 165 мм",       price:14800,  oldPrice:17900,  image:"f.jpg",    category:"kitchen"},
+  {id:"kn3", name:"Нож для хлеба 230 мм",          price:5200,   oldPrice:null,   image:"g.jpg",    category:"kitchen"},
+  {id:"kn4", name:"Универсальный 150 мм VG-10",    price:6800,   oldPrice:8200,   image:"h.jpg",    category:"kitchen"},
+  {id:"cut1",name:"Филейный нож 180 мм гибкий",    price:4900,   oldPrice:6200,   image:"i.jpg",    category:"cutting"},
+  {id:"cut2",name:"Разделочный 250 мм Butcher",    price:7800,   oldPrice:null,   image:"j.jpg",    category:"cutting"},
+  {id:"cut3",name:"Слайсер 300 мм",                price:6500,   oldPrice:8100,   image:"k.jpg",    category:"cutting"},
+  {id:"kat1",name:"Катана T10 Clay Tempered 104 см",price:28900, oldPrice:34900, image:"kat1.jpg",    category:"katana"},
+  {id:"kat2",name:"Katana Samurai Edition",        price:12400,  oldPrice:15800,  image:"kat2.jpg",    category:"katana"},
+  {id:"kat3",name:"Ninja-to 70 см тренировочная",  price:9800,   oldPrice:null,   image:"kat3.jpg",    category:"katana"},
+  {id:"kat5",name:"Ninja",   price:16800,  oldPrice:21900,  image:"kat5.jpg",    category:"katana"},
+  {id:"set2",name:"Стейк-набор 4 ножа + подставка",price:9400,  oldPrice:null,   image:"p.jpg",    category:"sets"},
+  {id:"stat1",name:"Канцелярский нож металлический",price:1200, oldPrice:1800,  image:"q.jpg",    category:"stationery"},
+  {id:"stat2",name:"Нож макетный с запасными лезвиями",price:850,oldPrice:null,image:"r.jpg",    category:"stationery"},
+  {id:"fl1", name:"Фонарь тактический XHP70 2500 lm",price:4200,oldPrice:5600, image:"s.jpg",    category:"flashlights"},
+  {id:"fl2", name:"Фонарик EDC 1000 lm USB-C",     price:1800,   oldPrice:2400,   image:"t.jpg",    category:"flashlights"},
+  {id:"fl3", name:"Налобный фонарь 800 lm",        price:2600,   oldPrice:null,   image:"u.jpg",    category:"flashlights"},
+  {id:"bin1",name:"Бинокль 10×42 водозащищённый",  price:12400,  oldPrice:15800,  image:"v.jpg",    category:"binoculars"},
+  {id:"bin2",name:"Монокуляр 12×50 HD",            price:6800,   oldPrice:8900,   image:"w.jpg",    category:"binoculars"},
+  {id:"bin3",name:"Бинокль компактный 8×21",       price:3200,   oldPrice:null,   image:"x.jpg",    category:"binoculars"},
+  {id:"kn5", name:"Нож для сыра с вилкой",         price:3400,   oldPrice:4500,   image:"1.jpg",    category:"kitchen"},
+  {id:"cut4",name:"Топорик кухонный 18 см",        price:5900,   oldPrice:null,   image:"2.jpg",    category:"cutting"},
+  {id:"kat4",name:"Вакидзаси 60 см",               price:21800,  oldPrice:26900,  image:"kat4.jpg",    category:"katana"},
+  {id:"set3",name:"Набор для пикника 8 пр.",       price:11200,  oldPrice:null,   image:"4.jpg",    category:"sets"},
+  {id:"fl4", name:"Фонарь-прожектор 5000 lm",      price:8900,   oldPrice:11900,  image:"5.jpg",    category:"flashlights"},
+  {id:"bin4",name:"Бинокль ночного видения 5×40",  price:29800,  oldPrice:35900,  image:"6.jpg",    category:"binoculars"},
+];
+
+const sections = {
+  hitsScroll: document.getElementById('hitsScroll'),
+  newScroll: document.getElementById('newScroll'),
+  popularScroll: document.getElementById('popularScroll'),
+  tacticalScroll: document.getElementById('tacticalScroll'),
+  collectScroll: document.getElementById('collectScroll'),
+  favoritesScroll: document.getElementById('favoritesScroll')
+};
+
+const searchInput = document.getElementById('searchInput');
+const filterBtn = document.getElementById('filterBtn');
+const filterMenu = document.getElementById('filterMenu');
+const minInput   = document.getElementById('minPriceInput');
+const maxInput   = document.getElementById('maxPriceInput');
+const applyBtn   = document.getElementById('applyRangeBtn');
+const resetBtn   = document.getElementById('resetRangeBtn');
+const cartModal = document.getElementById('cartModal');
+const cartItemsEl = document.getElementById('cartItems');
+const cartTotalEl = document.getElementById('cartTotal');
+const cartClose = document.querySelector('.cart-close');
+const cartNav = document.getElementById('cartNav');
+const checkoutBtn = document.getElementById('checkoutBtn');
+const favSection = document.getElementById('favoritesSection');
+const favEmpty = document.getElementById('favEmpty');
+const favNav = document.getElementById('favNav');
+const pageTransition = document.getElementById('pageTransition');
+
+let minPrice = 0;
+let maxPrice = Infinity;
+let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+
+function getCart() { return JSON.parse(localStorage.getItem('cart') || '[]'); }
+function saveCart(cart) { localStorage.setItem('cart', JSON.stringify(cart)); }
+
+function removeFromCart(id) {
+  let cart = getCart();
+  cart = cart.filter(item => item.id !== id);
+  saveCart(cart);
+  renderCart();
+}
+
+function renderCart() {
+  const cart = getCart();
+  cartItemsEl.innerHTML = '';
+  if (cart.length === 0) {
+    cartItemsEl.innerHTML = '<div class="cart-empty">Корзина пуста</div>';
+    cartTotalEl.innerHTML = '<strong>Итого: 0 ₽</strong>';
+    checkoutBtn.style.display = 'none';
+    return;
+  }
+  checkoutBtn.style.display = 'block';
+  let total = 0;
+  cart.forEach(item => {
+    const sum = item.price * item.qty;
+    total += sum;
+    const div = document.createElement('div');
+    div.className = 'cart-item';
+    div.innerHTML = `
+      <img src="static/images/${item.image}" alt="${item.name}">
+      <div class="cart-item-info">
+        <div class="cart-item-name">${item.name}</div>
+        <div class="cart-item-price">${item.price.toLocaleString('ru-RU')} ₽ × ${item.qty}</div>
+        <div class="cart-item-qty">Сумма: ${sum.toLocaleString('ru-RU')} ₽</div>
+      </div>
+      <button class="cart-item-remove" data-id="${item.id}">Удалить</button>
+    `;
+    cartItemsEl.appendChild(div);
+  });
+  cartTotalEl.innerHTML = `<strong>Итого: ${total.toLocaleString('ru-RU')} ₽</strong>`;
+  document.querySelectorAll('.cart-item-remove').forEach(btn => {
+    btn.onclick = () => removeFromCart(btn.dataset.id);
+  });
+}
+
+cartNav.onclick = () => {
+  renderCart();
+  cartModal.style.display = 'flex';
+};
+
+cartClose.onclick = () => cartModal.style.display = 'none';
+cartModal.onclick = e => { if (e.target === cartModal) cartModal.style.display = 'none'; };
+
+checkoutBtn.onclick = () => {
+  alert("Переход к оформлению заказа");
+};
+
+function toggleFavorite(id) {
+  if (favorites.includes(id)) {
+    favorites = favorites.filter(fid => fid !== id);
+  } else {
+    favorites.push(id);
+  }
+  localStorage.setItem('favorites', JSON.stringify(favorites));
+  updateContent();
+  renderFavorites();
+}
+
+function createCard(item) {
+  const card = document.createElement('div');
+  card.className = 'product-card';
+  const isFav = favorites.includes(item.id);
+  card.innerHTML = `
+    <div class="favorite ${isFav ? 'active' : ''}" data-id="${item.id}">${isFav ? '♥' : '♡'}</div>
+    <img src="static/images/${item.image}" alt="${item.name}" loading="lazy">
+    <div class="product-name">${item.name}</div>
+    <div class="price-block">
+      <div class="current-price">${item.price.toLocaleString('ru-RU')} ₽</div>
+      ${item.oldPrice ? `<div class="old-price">${item.oldPrice.toLocaleString('ru-RU')} ₽</div>` : '<div style="visibility:hidden;"> </div>'}
+    </div>
+  `;
+
+  card.onclick = (e) => {
+    if (e.target.closest('.favorite')) return;
+
+    document.getElementById('pageTransition').classList.add('active');
+
+    setTimeout(() => {
+      window.location.href = `knife.html?id=${item.id}`;
+    }, 580);
+  };
+
+  card.querySelector('.favorite').onclick = (e) => {
+    e.stopPropagation();
+    toggleFavorite(item.id);
+  };
+
+  return card;
+}
+
+function renderSection(container, items) {
+  container.innerHTML = '';
+  items.forEach(item => container.appendChild(createCard(item)));
+}
+
+function renderFavorites() {
+  const favItems = knives.filter(k => favorites.includes(k.id));
+  sections.favoritesScroll.innerHTML = '';
+  if (favItems.length === 0) {
+    favEmpty.style.display = 'block';
+  } else {
+    favEmpty.style.display = 'none';
+    favItems.forEach(item => {
+      sections.favoritesScroll.appendChild(createCard(item));
+    });
+  }
+}
+
+// ───────────────────────────────────────────────
+//                ФИЛЬТР ДИАПАЗОНА ЦЕН
+// ───────────────────────────────────────────────
+
+function formatNumber(num) {
+  return num ? num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ") : '';
+}
+
+function unformatNumber(str) {
+  return parseInt(str.replace(/\s/g, '')) || 0;
+}
+
+// Форматирование ввода с пробелами
+[minInput, maxInput].forEach(input => {
+  input.addEventListener('input', e => {
+    let val = unformatNumber(e.target.value);
+    if (!isNaN(val)) {
+      e.target.value = formatNumber(val);
+    }
+  });
+
+  input.addEventListener('focus', e => {
+    e.target.value = unformatNumber(e.target.value);
+  });
+
+  input.addEventListener('blur', e => {
+    let val = unformatNumber(e.target.value);
+    e.target.value = val > 0 ? formatNumber(val) : '';
+  });
+});
+
+// Подсветка ошибки если "От" > "До"
+function validateInputs() {
+  let minV = unformatNumber(minInput.value);
+  let maxV = unformatNumber(maxInput.value);
+  const invalid = minV > maxV && maxV > 0;
+  minInput.classList.toggle('invalid', invalid);
+  maxInput.classList.toggle('invalid', invalid);
+}
+
+[minInput, maxInput].forEach(inp => inp.addEventListener('input', validateInputs));
+
+// Применение фильтра
+function applyPriceFilter() {
+  let minVal = unformatNumber(minInput.value);
+  let maxVal = unformatNumber(maxInput.value);
+
+  if (minVal > maxVal && maxVal > 0) {
+    [minVal, maxVal] = [maxVal, minVal];
+  }
+
+  minPrice = minVal;
+  maxPrice = maxVal > 0 ? maxVal : Infinity;
+
+  updateContent();
+  updateFilterButtonText();
+  filterMenu.style.display = 'none';
+}
+
+applyBtn.onclick = applyPriceFilter;
+
+resetBtn.onclick = () => {
+  minPrice = 0;
+  maxPrice = Infinity;
+  minInput.value = '';
+  maxInput.value = '';
+  updateContent();
+  updateFilterButtonText();
+  filterMenu.style.display = 'none';
+};
+
+// Быстрые диапазоны
+document.querySelectorAll('.quick-item').forEach(el => {
+  el.onclick = () => {
+    minPrice = Number(el.dataset.min);
+    maxPrice = Number(el.dataset.max);
+    minInput.value = minPrice === 0 ? '' : formatNumber(minPrice);
+    maxInput.value = maxPrice >= 999999 ? '' : formatNumber(maxPrice);
+    updateContent();
+    updateFilterButtonText();
+    filterMenu.style.display = 'none';
+  };
+});
+
+// Текст и активность кнопки "Фильтр"
+function updateFilterButtonText() {
+  let text = "Фильтр";
+  let active = false;
+
+  if (minPrice > 0 || (maxPrice !== Infinity && maxPrice < 9999999)) {
+    active = true;
+    let from = minPrice > 0 ? formatNumber(minPrice) : '';
+    let to   = maxPrice !== Infinity ? formatNumber(maxPrice) : '';
+
+    if (from && to)      text = `${from} – ${to} ₽`;
+    else if (from)       text = `от ${from} ₽`;
+    else if (to)         text = `до ${to} ₽`;
+  }
+
+  filterBtn.textContent = text;
+  filterBtn.classList.toggle('active', active);
+}
+
+// Открытие / закрытие меню
+filterBtn.onclick = () => {
+  const isVisible = filterMenu.style.display === 'block';
+  filterMenu.style.display = isVisible ? 'none' : 'block';
+
+  if (!isVisible) {
+    minInput.value = minPrice > 0 ? formatNumber(minPrice) : '';
+    maxInput.value = maxPrice !== Infinity ? formatNumber(maxPrice) : '';
+    validateInputs();
+  }
+};
+
+// Закрытие по клику вне меню
+document.addEventListener('click', e => {
+  if (!filterBtn.contains(e.target) && !filterMenu.contains(e.target)) {
+    filterMenu.style.display = 'none';
+  }
+});
+
+// Enter → применить
+[maxInput, minInput].forEach(inp => {
+  inp.addEventListener('keydown', e => {
+    if (e.key === 'Enter') {
+      applyPriceFilter();
+    }
+  });
+});
+
+// ───────────────────────────────────────────────
+
+function updateContent() {
+  const query = searchInput.value.trim().toLowerCase();
+  const filtered = knives.filter(k =>
+    k.name.toLowerCase().includes(query) &&
+    k.price >= minPrice &&
+    (maxPrice === Infinity || k.price <= maxPrice)
+  );
+
+  renderSection(sections.hitsScroll, filtered.filter(k => k.category === "хит"));
+  renderSection(sections.newScroll, filtered.filter(k => k.category === "новинка"));
+  renderSection(sections.popularScroll, filtered.filter(k => k.category === "популярная"));
+  renderSection(sections.tacticalScroll, filtered.filter(k => k.category === "тактический"));
+  renderSection(sections.collectScroll, filtered.filter(k => k.category === "коллекционный"));
+  renderFavorites();
+}
+
+searchInput.addEventListener('input', updateContent);
+
+const catalogNav = document.getElementById('catalogNav');
+
+if (catalogNav) {
+  catalogNav.onclick = function(e) {
+    e.preventDefault();
+    document.getElementById('pageTransition').classList.add('active');
+    setTimeout(() => {
+      window.location.href = "katalog.html";
+    }, 550);
+  };
+}
+
+favNav.onclick = () => {
+  favSection.scrollIntoView({ behavior: 'smooth' });
+};
+
+// Инициализация
+updateContent();
+renderFavorites();
+updateFilterButtonText();
+</script>
+</body>
+</html>
