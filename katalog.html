@@ -13,7 +13,6 @@
       min-height: 100vh;
       padding-bottom: 90px;
     }
-
     /* Шапка */
     .header {
       position: sticky;
@@ -27,17 +26,14 @@
       justify-content: center;
       box-shadow: 0 2px 8px rgba(0,0,0,0.05);
     }
-
     .header-title {
       font-size: 20px;
       font-weight: 600;
     }
-
     /* Список категорий */
     .categories {
       padding: 16px;
     }
-
     .category-item {
       display: flex;
       align-items: center;
@@ -49,11 +45,9 @@
       cursor: pointer;
       transition: transform 0.15s;
     }
-
     .category-item:active {
       transform: scale(0.98);
     }
-
     .category-icon {
       width: 60px;
       height: 60px;
@@ -62,19 +56,16 @@
       border-radius: 12px;
       background: #ffffff;
     }
-
     .category-name {
       flex: 1;
       font-size: 17px;
       font-weight: 500;
     }
-
     .arrow {
       font-size: 24px;
       color: #c7c7cc;
     }
-
-    /* Нижняя навигация — точная копия из вашего оригинального кода */
+    /* Нижняя навигация */
     .bottom-nav {
       position: fixed;
       bottom: 0;
@@ -87,7 +78,6 @@
       z-index: 200;
       box-shadow: 0 -2px 10px rgba(0,0,0,0.06);
     }
-
     .nav-item {
       flex: 1;
       display: flex;
@@ -100,13 +90,10 @@
       transition: color 0.2s;
       cursor: pointer;
     }
-
     .nav-item.active,
     .nav-item:hover { color: #000000; }
-
     .nav-icon { font-size: 26px; line-height: 1; }
-
-    /* Иконка дома — как было изначально */
+    /* Иконка дома */
     .icon-home {
       position: relative;
       width: 26px;
@@ -131,8 +118,7 @@
       border: 2px solid currentColor;
       border-top: none;
     }
-
-    /* Иконка профиля — как было изначально */
+    /* Иконка профиля */
     .icon-profile {
       position: relative;
       width: 26px;
@@ -157,90 +143,63 @@
       border-top: none;
       border-radius: 0 0 8px 8px;
     }
-
-    /* Анимация появления страницы */
+    /* Лёгкая анимация появления самой страницы (оставил, но её можно тоже убрать) */
     body {
       animation: slideIn 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
     }
-
     @keyframes slideIn {
       from { transform: translateX(-30%); opacity: 0; }
-      to   { transform: translateX(0);    opacity: 1; }
-    }
-
-    .page-transition {
-      position: fixed;
-      inset: 0;
-      background: white;
-      z-index: 9999;
-      transform: translateX(-100%);
-      transition: transform 0.55s cubic-bezier(0.32, 0.72, 0, 1);
-      pointer-events: none;
-    }
-
-    .page-transition.active {
-      transform: translateX(0);
-      pointer-events: auto;
+      to { transform: translateX(0); opacity: 1; }
     }
   </style>
 </head>
 <body>
-
 <div class="header">
   <div class="header-title">Каталог</div>
 </div>
-
 <div class="categories">
   <div class="category-item" data-category="kerambits">
     <img src="static/images/k1.jpg" class="category-icon" alt="Керамбиты">
     <div class="category-name">Керамбиты</div>
     <div class="arrow">›</div>
   </div>
-
   <div class="category-item" data-category="kitchen">
     <img src="static/images/b.jpg" class="category-icon" alt="Кухонные ножи">
     <div class="category-name">Кухонные ножи</div>
     <div class="arrow">›</div>
   </div>
-
   <div class="category-item" data-category="cutting">
     <img src="static/images/c.jpg" class="category-icon" alt="Разделочные ножи">
     <div class="category-name">Разделочные ножи</div>
     <div class="arrow">›</div>
   </div>
-
   <div class="category-item" data-category="katana">
     <img src="static/images/kat5.jpg" class="category-icon" alt="Катаны">
     <div class="category-name">Катаны</div>
     <div class="arrow">›</div>
   </div>
-
   <div class="category-item" data-category="sets">
     <img src="static/images/e.jpg" class="category-icon" alt="Наборы ножей">
     <div class="category-name">Наборы ножей</div>
     <div class="arrow">›</div>
   </div>
-
   <div class="category-item" data-category="stationery">
     <img src="static/images/f.jpg" class="category-icon" alt="Канцелярские ножи">
     <div class="category-name">Канцелярские ножи</div>
     <div class="arrow">›</div>
   </div>
-
   <div class="category-item" data-category="flashlights">
     <img src="static/images/hp.jpg" class="category-icon" alt="Фонарики">
     <div class="category-name">Фонарики</div>
     <div class="arrow">›</div>
   </div>
-
   <div class="category-item" data-category="binoculars">
     <img src="static/images/my.jpg" class="category-icon" alt="Бинокли">
     <div class="category-name">Бинокли</div>
     <div class="arrow">›</div>
   </div>
 </div>
-
-<!-- Нижняя навигация — с восстановленными иконками -->
+<!-- Нижняя навигация -->
 <div class="bottom-nav">
   <div class="nav-item" id="homeNav">
     <div class="nav-icon icon-home">
@@ -265,9 +224,6 @@
     Профиль
   </div>
 </div>
-
-<div id="pageTransition" class="page-transition"></div>
-
 <!-- Модальное окно корзины -->
 <div id="cartModal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.6); z-index:300; align-items:center; justify-content:center; padding:20px;">
   <div style="background:#fff; border-radius:16px; width:100%; max-width:420px; max-height:90vh; overflow-y:auto; box-shadow:0 10px 40px rgba(0,0,0,0.3);">
@@ -291,7 +247,6 @@ function renderCart() {
   const itemsEl = document.getElementById('cartItems');
   const totalEl = document.getElementById('cartTotal');
   const btn = document.getElementById('checkoutBtn');
-
   itemsEl.innerHTML = '';
   if (cart.length === 0) {
     itemsEl.innerHTML = '<div style="padding:40px 20px; text-align:center; color:#888; font-size:16px;">Корзина пуста</div>';
@@ -300,7 +255,6 @@ function renderCart() {
     return;
   }
   btn.style.display = 'block';
-
   let total = 0;
   cart.forEach(item => {
     const sum = item.price * item.qty;
@@ -318,9 +272,7 @@ function renderCart() {
     `;
     itemsEl.appendChild(div);
   });
-
   totalEl.innerHTML = `<strong>Итого: ${total.toLocaleString('ru-RU')} ₽</strong>`;
-
   document.querySelectorAll('.remove-btn').forEach(btn => {
     btn.onclick = () => {
       let cart = getCart();
@@ -346,26 +298,19 @@ document.getElementById('cartModal').onclick = e => {
   }
 };
 
-// Переход на главную
+// Переход на главную — мгновенный, без анимации
 const homeNav = document.getElementById('homeNav');
-const transition = document.getElementById('pageTransition');
-
 homeNav.onclick = function(e) {
   e.preventDefault();
-  transition.classList.add('active');
-  setTimeout(() => window.location.href = 'index.html', 550);
+  window.location.href = 'index.html';
 };
 
-// Переход в категорию
+// Переход в категорию — мгновенный, без анимации и без шторки
 document.querySelectorAll('.category-item').forEach(item => {
   item.addEventListener('click', function() {
     const cat = this.dataset.category;
     if (!cat) return;
-
-    transition.classList.add('active');
-    setTimeout(() => {
-      window.location.href = `category.html?cat=${cat}`;
-    }, 550);
+    window.location.href = `category.html?cat=${cat}`;
   });
 });
 </script>
