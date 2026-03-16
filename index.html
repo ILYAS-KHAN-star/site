@@ -634,7 +634,14 @@
     Избранное
   </div>
   <div class="nav-item" id="cartNav">
-    <div class="nav-icon">🛍</div>
+    <div class="nav-icon">
+      <!-- Новая серая SVG-корзина -->
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M6 2L3 6V20C3 20.5304 3.21071 21.0391 3.58579 21.4142C3.96086 21.7893 4.46957 22 5 22H19C19.5304 22 20.0391 21.7893 20.4142 21.4142C20.7893 21.0391 21 20.5304 21 20V6L18 2H6Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M3 6H21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M16 10C16 11.0609 15.5786 12.0783 14.8284 12.8284C14.0783 13.5786 13.0609 14 12 14C10.9391 14 9.92172 13.5786 9.17157 12.8284C8.42143 12.0783 8 11.0609 8 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
     Корзина
   </div>
   <div class="nav-item">
@@ -689,7 +696,6 @@ const knives = [
   {id:"knife45", name:"Математик", price:2700, oldPrice:3400, image:"12.jpg", category:"тактический"},
   {id:"knife46", name:"Резак", price:2500, oldPrice:3200, image:"13.jpg", category:"коллекционный"},
   {id:"knife47", name:"Правша", price:3100, oldPrice:null, image:"14.jpg", category:"новинка"},
-  {id:"knife48", name:"Левша", price:2500, oldPrice:3100, image:"15.jpg", category:"новинка"},
   {id:"k1",  name:"Doppler Phase 4", price:185000, oldPrice:210000, image:"k1.jpg",    category:"kerambits"},
   {id:"k2",  name:"Gamma Doppler",  price:238000, oldPrice:265000, image:"k2.jpg",    category:"kerambits"},
   {id:"k3",  name:"Lore", price:98000,  oldPrice:125000, image:"k3.jpg",    category:"kerambits"},
@@ -708,26 +714,26 @@ const knives = [
   {id:"kn4", name:"Универсальный 150 мм VG-10",    price:6800,   oldPrice:8200,   image:"h.jpg",    category:"kitchen"},
   {id:"cut1",name:"Филейный нож 180 мм гибкий",    price:4900,   oldPrice:6200,   image:"i.jpg",    category:"cutting"},
   {id:"cut2",name:"Разделочный 250 мм Butcher",    price:7800,   oldPrice:null,   image:"j.jpg",    category:"cutting"},
-  {id:"cut3",name:"Слайсер 300 мм",                price:6500,   oldPrice:8100,   image:"k.jpg",    category:"cutting"},
+  {id:"cut3",name:"Слайсер 300 мм",                price:6500,   oldPrice:8100,   image:"v.jpg",    category:"cutting"},
   {id:"kat1",name:"Катана T10 Clay Tempered 104 см",price:28900, oldPrice:34900, image:"kat1.jpg",    category:"katana"},
   {id:"kat2",name:"Katana Samurai Edition",        price:12400,  oldPrice:15800,  image:"kat2.jpg",    category:"katana"},
   {id:"kat3",name:"Ninja-to 70 см тренировочная",  price:9800,   oldPrice:null,   image:"kat3.jpg",    category:"katana"},
   {id:"kat5",name:"Ninja",   price:16800,  oldPrice:21900,  image:"kat5.jpg",    category:"katana"},
-  {id:"set2",name:"Стейк-набор 4 ножа + подставка",price:9400,  oldPrice:null,   image:"p.jpg",    category:"sets"},
-  {id:"stat1",name:"Канцелярский нож металлический",price:1200, oldPrice:1800,  image:"q.jpg",    category:"stationery"},
-  {id:"stat2",name:"Нож макетный с запасными лезвиями",price:850,oldPrice:null,image:"r.jpg",    category:"stationery"},
-  {id:"fl1", name:"Фонарь тактический XHP70 2500 lm",price:4200,oldPrice:5600, image:"s.jpg",    category:"flashlights"},
+  {id:"set2",name:"Дамасская сталь 5шт",price:9400,  oldPrice:null,   image:"nb2.jpg",    category:"sets"},
+  {id:"stat1",name:"Канцелярский нож металлический",price:1200, oldPrice:1800,  image:"sr.jpg",    category:"stationery"},
+  {id:"stat2",name:"Нож макетный с запасными лезвиями",price:850,oldPrice:null,image:"sr3.jpg",    category:"stationery"},
+  {id:"fl1", name:"Фонарь тактический XHP70 2500 lm",price:4200,oldPrice:5600, image:"hp.jpg",    category:"flashlights"},
   {id:"fl2", name:"Фонарик EDC 1000 lm USB-C",     price:1800,   oldPrice:2400,   image:"ph3.jpg",    category:"flashlights"},
-  {id:"fl3", name:"Налобный фонарь 800 lm",        price:2600,   oldPrice:null,   image:"u.jpg",    category:"flashlights"},
-  {id:"bin1",name:"Бинокль 10×42 водозащищённый",  price:12400,  oldPrice:15800,  image:"v.jpg",    category:"binoculars"},
-  {id:"bin2",name:"Монокуляр 12×50 HD",            price:6800,   oldPrice:8900,   image:"w.jpg",    category:"binoculars"},
-  {id:"bin3",name:"Бинокль компактный 8×21",       price:3200,   oldPrice:null,   image:"x.jpg",    category:"binoculars"},
+  {id:"fl3", name:"Фонарь 800 lm",        price:2600,   oldPrice:null,   image:"ph4.jpg",    category:"flashlights"},
+  {id:"bin1",name:"Бинокль 10×42 водозащищённый",  price:12400,  oldPrice:15800,  image:"bin1.jpg",    category:"binoculars"},
+  {id:"bin2",name:"Монокуляр 12×50 HD",            price:6800,   oldPrice:8900,   image:"bin2.jpg",    category:"binoculars"},
+  {id:"bin3",name:"Бинокль компактный 8×21",       price:3200,   oldPrice:null,   image:"bin3.jpg",    category:"binoculars"},
   {id:"kn5", name:"Нож для сыра с вилкой",         price:3400,   oldPrice:4500,   image:"1.jpg",    category:"kitchen"},
-  {id:"cut4",name:"Топорик кухонный 18 см",        price:5900,   oldPrice:null,   image:"2.jpg",    category:"cutting"},
+  {id:"cut4",name:"Нож кухонный 18 см",        price:5900,   oldPrice:null,   image:"2.jpg",    category:"cutting"},
   {id:"kat4",name:"Вакидзаси 60 см",               price:21800,  oldPrice:26900,  image:"kat4.jpg",    category:"katana"},
-  {id:"set3",name:"Набор для пикника 8 пр.",       price:11200,  oldPrice:null,   image:"4.jpg",    category:"sets"},
-  {id:"fl4", name:"Фонарь-прожектор 5000 lm",      price:8900,   oldPrice:11900,  image:"5.jpg",    category:"flashlights"},
-  {id:"bin4",name:"Бинокль ночного видения 5×40",  price:29800,  oldPrice:35900,  image:"6.jpg",    category:"binoculars"},
+  {id:"set3",name:"Набор для пикника 8 пр.",       price:11200,  oldPrice:null,   image:"nb1.jpg",    category:"sets"},
+  {id:"fl4", name:"Фонарь-прожектор 5000 lm",      price:8900,   oldPrice:11900,  image:"ph2.jpg",    category:"flashlights"},
+  {id:"bin4",name:"Бинокль ночного видения 5×40",  price:29800,  oldPrice:35900,  image:"bin4.jpg",    category:"binoculars"},
 ];
 
 const sections = {
@@ -840,7 +846,6 @@ function createCard(item) {
     </div>
   `;
 
-  // Клик по карточке → мгновенный переход без анимации
   card.onclick = (e) => {
     if (e.target.closest('.favorite')) return;
     window.location.href = `knife.html?id=${item.id}`;
@@ -871,139 +876,6 @@ function renderFavorites() {
     });
   }
 }
-
-// ───────────────────────────────────────────────
-//                ФИЛЬТР ДИАПАЗОНА ЦЕН
-// ───────────────────────────────────────────────
-
-function formatNumber(num) {
-  return num ? num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ") : '';
-}
-
-function unformatNumber(str) {
-  return parseInt(str.replace(/\s/g, '')) || 0;
-}
-
-// Форматирование ввода с пробелами
-[minInput, maxInput].forEach(input => {
-  input.addEventListener('input', e => {
-    let val = unformatNumber(e.target.value);
-    if (!isNaN(val)) {
-      e.target.value = formatNumber(val);
-    }
-  });
-
-  input.addEventListener('focus', e => {
-    e.target.value = unformatNumber(e.target.value);
-  });
-
-  input.addEventListener('blur', e => {
-    let val = unformatNumber(e.target.value);
-    e.target.value = val > 0 ? formatNumber(val) : '';
-  });
-});
-
-// Подсветка ошибки если "От" > "До"
-function validateInputs() {
-  let minV = unformatNumber(minInput.value);
-  let maxV = unformatNumber(maxInput.value);
-  const invalid = minV > maxV && maxV > 0;
-  minInput.classList.toggle('invalid', invalid);
-  maxInput.classList.toggle('invalid', invalid);
-}
-
-[minInput, maxInput].forEach(inp => inp.addEventListener('input', validateInputs));
-
-// Применение фильтра
-function applyPriceFilter() {
-  let minVal = unformatNumber(minInput.value);
-  let maxVal = unformatNumber(maxInput.value);
-
-  if (minVal > maxVal && maxVal > 0) {
-    [minVal, maxVal] = [maxVal, minVal];
-  }
-
-  minPrice = minVal;
-  maxPrice = maxVal > 0 ? maxVal : Infinity;
-
-  updateContent();
-  updateFilterButtonText();
-  filterMenu.style.display = 'none';
-}
-
-applyBtn.onclick = applyPriceFilter;
-
-resetBtn.onclick = () => {
-  minPrice = 0;
-  maxPrice = Infinity;
-  minInput.value = '';
-  maxInput.value = '';
-  updateContent();
-  updateFilterButtonText();
-  filterMenu.style.display = 'none';
-};
-
-// Быстрые диапазоны
-document.querySelectorAll('.quick-item').forEach(el => {
-  el.onclick = () => {
-    minPrice = Number(el.dataset.min);
-    maxPrice = Number(el.dataset.max);
-    minInput.value = minPrice === 0 ? '' : formatNumber(minPrice);
-    maxInput.value = maxPrice >= 999999 ? '' : formatNumber(maxPrice);
-    updateContent();
-    updateFilterButtonText();
-    filterMenu.style.display = 'none';
-  };
-});
-
-// Текст и активность кнопки "Фильтр"
-function updateFilterButtonText() {
-  let text = "Фильтр";
-  let active = false;
-
-  if (minPrice > 0 || (maxPrice !== Infinity && maxPrice < 9999999)) {
-    active = true;
-    let from = minPrice > 0 ? formatNumber(minPrice) : '';
-    let to   = maxPrice !== Infinity ? formatNumber(maxPrice) : '';
-
-    if (from && to)      text = `${from} – ${to} ₽`;
-    else if (from)       text = `от ${from} ₽`;
-    else if (to)         text = `до ${to} ₽`;
-  }
-
-  filterBtn.textContent = text;
-  filterBtn.classList.toggle('active', active);
-}
-
-// Открытие / закрытие меню
-filterBtn.onclick = () => {
-  const isVisible = filterMenu.style.display === 'block';
-  filterMenu.style.display = isVisible ? 'none' : 'block';
-
-  if (!isVisible) {
-    minInput.value = minPrice > 0 ? formatNumber(minPrice) : '';
-    maxInput.value = maxPrice !== Infinity ? formatNumber(maxPrice) : '';
-    validateInputs();
-  }
-};
-
-// Закрытие по клику вне меню
-document.addEventListener('click', e => {
-  if (!filterBtn.contains(e.target) && !filterMenu.contains(e.target)) {
-    filterMenu.style.display = 'none';
-  }
-});
-
-// Enter → применить
-[maxInput, minInput].forEach(inp => {
-  inp.addEventListener('keydown', e => {
-    if (e.key === 'Enter') {
-      applyPriceFilter();
-    }
-  });
-});
-
-// ───────────────────────────────────────────────
 
 function updateContent() {
   const query = searchInput.value.trim().toLowerCase();
