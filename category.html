@@ -403,7 +403,7 @@
     </div>
     Главная
   </div>
-  <div class="nav-item" id="catalogNav">
+  <div class="nav-item active" id="catalogNav">
     <div class="nav-icon">≡</div>
     Каталог
   </div>
@@ -412,13 +412,7 @@
     Избранное
   </div>
   <div class="nav-item" id="cartNav">
-    <div class="nav-icon">
-      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M6 2L3 6V20C3 20.5304 3.21071 21.0391 3.58579 21.4142C3.96086 21.7893 4.46957 22 5 22H19C19.5304 22 20.0391 21.7893 20.4142 21.4142C20.7893 21.0391 21 20.5304 21 20V6L18 2H6Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        <path d="M3 6H21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        <path d="M16 10C16 11.0609 15.5786 12.0783 14.8284 12.8284C14.0783 13.5786 13.0609 14 12 14C10.9391 14 9.92172 13.5786 9.17157 12.8284C8.42143 12.0783 8 11.0609 8 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-    </div>
+    <div class="nav-icon">🛍</div>
     Корзина
   </div>
   <div class="nav-item">
@@ -429,7 +423,17 @@
     Профиль
   </div>
 </div>
-
+<div id="cartModal" class="cart-modal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.6); z-index:300; align-items:center; justify-content:center; padding:20px;">
+  <div style="background:#fff; border-radius:16px; width:100%; max-width:420px; max-height:90vh; overflow-y:auto; box-shadow:0 10px 40px rgba(0,0,0,0.3);">
+    <div style="padding:16px 20px; border-bottom:1px solid #eee; font-size:18px; font-weight:600; display:flex; justify-content:space-between; align-items:center;">
+      <span>Корзина</span>
+      <span onclick="document.getElementById('cartModal').style.display='none'" style="font-size:24px; cursor:pointer; color:#777;">×</span>
+    </div>
+    <div id="cartItems"></div>
+    <div id="cartTotal" style="padding:16px 20px; font-size:17px; font-weight:600; border-top:1px solid #eee; display:flex; justify-content:space-between;"></div>
+    <button id="checkoutBtn" style="margin:16px 20px; padding:14px; background:#000; color:#fff; border:none; border-radius:10px; font-size:16px; font-weight:600; cursor:pointer; width:calc(100% - 40px);">Оформить заказ</button>
+  </div>
+</div>
 <script>
 const products = [
   {id:"knife1", name:"Ката", price:2500, oldPrice:3200, image:"a.jpg", category:""},
@@ -613,6 +617,7 @@ function createCard(item) {
     </div>
   `;
   
+  // Мгновенный переход без анимации и без шторки
   card.addEventListener('click', e => {
     if (e.target.closest('.favorite')) return;
     window.location.href = `knife.html?id=${item.id}`;
@@ -642,6 +647,7 @@ function updateProducts() {
   filtered.forEach(item => grid.appendChild(createCard(item)));
 }
 
+// ------------------- Улучшенный фильтр диапазона -------------------
 const filterMenu = document.getElementById('filterMenu');
 const filterBtn = document.getElementById('filterBtn');
 const minInput = document.getElementById('minPriceInput');
@@ -656,6 +662,7 @@ function unformatNumber(str) {
   return parseInt(str.replace(/\s/g, '')) || 0;
 }
 
+// Форматирование ввода
 [minInput, maxInput].forEach(input => {
   input.addEventListener('input', e => {
     let val = unformatNumber(e.target.value);
@@ -672,6 +679,7 @@ function unformatNumber(str) {
   });
 });
 
+// Валидация (подсветка ошибки если от > до)
 function validateInputs() {
   let minV = unformatNumber(minInput.value);
   let maxV = unformatNumber(maxInput.value);
@@ -681,6 +689,7 @@ function validateInputs() {
 }
 [minInput, maxInput].forEach(inp => inp.addEventListener('input', validateInputs));
 
+// Применение фильтра
 function applyPriceFilter() {
   let minVal = unformatNumber(minInput.value);
   let maxVal = unformatNumber(maxInput.value);
@@ -695,6 +704,7 @@ function applyPriceFilter() {
 }
 applyBtn.onclick = applyPriceFilter;
 
+// Сброс
 resetBtn.onclick = () => {
   minPrice = 0;
   maxPrice = Infinity;
@@ -705,6 +715,7 @@ resetBtn.onclick = () => {
   filterMenu.style.display = 'none';
 };
 
+// Быстрые диапазоны
 document.querySelectorAll('.quick-item').forEach(el => {
   el.onclick = () => {
     minPrice = Number(el.dataset.min);
@@ -717,6 +728,7 @@ document.querySelectorAll('.quick-item').forEach(el => {
   };
 });
 
+// Текст на кнопке фильтра
 function updateFilterButtonText() {
   let text = "Фильтр";
   let active = false;
@@ -732,6 +744,7 @@ function updateFilterButtonText() {
   filterBtn.classList.toggle('active', active);
 }
 
+// Открытие/закрытие меню
 filterBtn.onclick = () => {
   const isVisible = filterMenu.style.display === 'block';
   filterMenu.style.display = isVisible ? 'none' : 'block';
@@ -742,12 +755,14 @@ filterBtn.onclick = () => {
   }
 };
 
+// Закрытие по клику вне
 document.addEventListener('click', e => {
   if (!filterBtn.contains(e.target) && !filterMenu.contains(e.target)) {
     filterMenu.style.display = 'none';
   }
 });
 
+// Enter → применить
 [maxInput, minInput].forEach(inp => {
   inp.addEventListener('keydown', e => {
     if (e.key === 'Enter') {
@@ -770,6 +785,7 @@ document.getElementById('favNav').onclick = () => {
   window.location.href = 'index.html#favoritesSection';
 };
 
+// Инициализация
 updateProducts();
 updateFilterButtonText();
 </script>
