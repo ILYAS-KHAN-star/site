@@ -521,6 +521,7 @@ const products = [
   {id:"set3",name:"Набор для пикника 8 пр.", price:11200, oldPrice:null, image:"nb1.jpg", category:"sets"},
   {id:"fl4", name:"Фонарь-прожектор 5000 lm", price:8900, oldPrice:11900, image:"ph2.jpg", category:"flashlights"},
   {id:"bin4",name:"Бинокль ночного видения 5×40", price:29800, oldPrice:35900, image:"bin4.jpg", category:"binoculars"},
+  {id:"axe1",name:"Топор Ивара",  price:29800,  oldPrice:35900,  image:"axe1.jpg",    category:"axes"},
 ];
 
 const categories = {
@@ -531,7 +532,8 @@ const categories = {
   sets: { title: "Наборы ножей", items: products.filter(p => p.category === "sets") },
   stationery: { title: "Канцелярские ножи", items: products.filter(p => p.category === "stationery") },
   flashlights: { title: "Фонарики", items: products.filter(p => p.category === "flashlights") },
-  binoculars: { title: "Бинокли", items: products.filter(p => p.category === "binoculars") }
+  binoculars: { title: "Бинокли", items: products.filter(p => p.category === "binoculars") },
+  axes: { title: "Топоры", items: products.filter(p => p.category === "axes")}
 };
 
 const params = new URLSearchParams(window.location.search);
