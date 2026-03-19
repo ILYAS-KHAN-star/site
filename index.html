@@ -4,10 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
   <title>KNIVES A MILLION</title>
-
   <style>
     * { margin:0; padding:0; box-sizing:border-box; }
-
     body {
       font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
       background: #ffffff;
@@ -17,8 +15,6 @@
       overflow-x: hidden;
       position: relative;
     }
-
-    /* LUXURY HEADER */
     .main-header {
       background:#000;
       color:#fff;
@@ -29,25 +25,21 @@
       justify-content:center;
       border-bottom:1px solid #111;
     }
-
     .logo-container {
       text-align:center;
       position:relative;
     }
-
     .logo-title {
       font-size:20px;
       letter-spacing:6px;
       font-weight:600;
     }
-
     .logo-sub {
       font-size:11px;
       letter-spacing:4px;
       opacity:0.6;
       margin-top:6px;
     }
-
     .logo-line {
       width:60px;
       height:1px;
@@ -55,7 +47,6 @@
       margin:14px auto 0;
       opacity:0.6;
     }
-
     .search-container {
       position: sticky;
       top: 0;
@@ -68,7 +59,6 @@
       gap: 8px;
       box-shadow: 0 2px 10px rgba(0,0,0,0.04);
     }
-
     #searchInput {
       flex: 1;
       padding: 10px 14px;
@@ -78,9 +68,7 @@
       background: #f8f8f8;
       color: #222;
     }
-
     #searchInput::placeholder { color: #999; }
-
     #filterBtn {
       background: #111;
       color: #fff;
@@ -92,13 +80,11 @@
       cursor: pointer;
       transition: all 0.2s;
     }
-
     #filterBtn.active {
-      background: #0a0a0a !important;
+      background: #070707 !important;
       color: white !important;
       box-shadow: 0 0 0 2px rgba(45,93,163,0.4);
     }
-
     .filter-menu {
       display: none;
       position: absolute;
@@ -114,7 +100,6 @@
       overflow: hidden;
       padding-bottom: 8px;
     }
-
     .filter-header {
       padding: 14px 18px;
       font-size: 16px;
@@ -123,13 +108,11 @@
       border-bottom: 1px solid #222;
       background: #1a1a1a;
     }
-
     .range-inputs {
       display: flex;
       gap: 12px;
       padding: 16px 18px 8px;
     }
-
     .input-group {
       flex: 1;
       display: flex;
@@ -137,12 +120,10 @@
       gap: 6px;
       position: relative;
     }
-
     .input-group label {
       font-size: 13px;
       color: #aaa;
     }
-
     .input-group input {
       background: #1c1c1c;
       border: 1px solid #444;
@@ -152,24 +133,20 @@
       font-size: 16px;
       width: 100%;
     }
-
     .input-group input:focus {
       outline: none;
       border-color: #666;
       box-shadow: 0 0 0 2px rgba(100,100,100,0.3);
     }
-
     .input-group input.invalid {
       border-color: #c94d4d !important;
       background: #2a1a1a;
     }
-
     .input-group input::-webkit-outer-spin-button,
     .input-group input::-webkit-inner-spin-button {
       -webkit-appearance: none;
       margin: 0;
     }
-
     .rub {
       position: absolute;
       right: 12px;
@@ -178,13 +155,11 @@
       font-size: 15px;
       pointer-events: none;
     }
-
     .filter-actions {
       display: flex;
       gap: 10px;
       padding: 0 18px 14px;
     }
-
     .action-btn {
       flex: 1;
       padding: 12px;
@@ -195,32 +170,25 @@
       cursor: pointer;
       transition: all 0.2s;
     }
-
     .apply {
-      background: #000000;
-      color: #ffffff;
+      background: #0e0e0f;
+      color: white;
     }
-
     .apply:hover {
-      background: #222222;
-      box-shadow: 0 0 0 2px rgba(255,255,255,0.08);
+      background: #0e0e0e;
     }
-
     .reset {
-      background: #333333;
-      color: #cccccc;
+      background: #333;
+      color: #ccc;
     }
-
     .reset:hover {
-      background: #444444;
+      background: #444;
     }
-
     .quick-ranges {
       padding: 0 18px 10px;
       border-top: 1px solid #222;
       margin-top: 6px;
     }
-
     .quick-item {
       padding: 12px 0;
       font-size: 14.5px;
@@ -228,11 +196,9 @@
       cursor: pointer;
       transition: color 0.15s;
     }
-
     .quick-item:hover {
       color: #eee;
     }
-
     .section-title {
       padding: 20px 14px 10px;
       font-size: 19px;
@@ -240,7 +206,6 @@
       color: #000;
       background: #fff;
     }
-
     .horizontal-scroll {
       display: flex;
       overflow-x: auto;
@@ -249,9 +214,7 @@
       scroll-snap-type: x proximity;
       -webkit-overflow-scrolling: touch;
     }
-
     .horizontal-scroll::-webkit-scrollbar { display: none; }
-
     .product-card {
       flex: 0 0 164px;
       width: 164px;
@@ -269,19 +232,16 @@
       display: flex;
       flex-direction: column;
     }
-
     .product-card:hover {
       transform: translateY(-4px);
       box-shadow: 0 6px 16px rgba(0,0,0,0.1);
     }
-
     .product-card img {
       width: 100%;
       height: 140px;
       object-fit: contain;
       margin-bottom: 10px;
     }
-
     .favorite {
       position: absolute;
       top: 10px;
@@ -292,12 +252,10 @@
       transition: color 0.2s, transform 0.15s;
       z-index: 2;
     }
-
     .favorite.active {
       color: #000000;
       transform: scale(1.15);
     }
-
     .product-name {
       font-size: 13.5px;
       line-height: 1.35;
@@ -310,7 +268,6 @@
       justify-content: center;
       text-align: center;
     }
-
     .price-block {
       display: flex;
       flex-direction: column;
@@ -320,19 +277,16 @@
       justify-content: flex-end;
       margin-top: 4px;
     }
-
     .current-price {
       font-size: 16px;
       font-weight: 600;
       color: #000;
     }
-
     .old-price {
       font-size: 13px;
       color: #888;
       text-decoration: line-through;
     }
-
     .cart-modal {
       display: none;
       position: fixed;
@@ -343,7 +297,6 @@
       justify-content: center;
       padding: 20px;
     }
-
     .cart-content {
       background: #fff;
       border-radius: 16px;
@@ -353,7 +306,6 @@
       overflow-y: auto;
       box-shadow: 0 10px 40px rgba(0,0,0,0.3);
     }
-
     .cart-header {
       padding: 16px 20px;
       border-bottom: 1px solid #eee;
@@ -363,13 +315,11 @@
       justify-content: space-between;
       align-items: center;
     }
-
     .cart-close {
       font-size: 24px;
       cursor: pointer;
       color: #777;
     }
-
     .cart-item {
       display: flex;
       align-items: center;
@@ -377,7 +327,6 @@
       border-bottom: 1px solid #eee;
       gap: 12px;
     }
-
     .cart-item img {
       width: 60px;
       height: 60px;
@@ -385,27 +334,22 @@
       border-radius: 8px;
       background: #f8f8f8;
     }
-
     .cart-item-info {
       flex: 1;
     }
-
     .cart-item-name {
       font-size: 15px;
       font-weight: 500;
     }
-
     .cart-item-price {
       font-size: 14px;
       color: #555;
       margin-top: 4px;
     }
-
     .cart-item-qty {
       font-size: 13px;
       color: #777;
     }
-
     .cart-item-remove {
       background: #000;
       color: #fff;
@@ -416,7 +360,6 @@
       cursor: pointer;
       white-space: nowrap;
     }
-
     .cart-total {
       padding: 16px 20px;
       font-size: 17px;
@@ -425,7 +368,6 @@
       display: flex;
       justify-content: space-between;
     }
-
     .cart-checkout {
       margin: 16px 20px;
       padding: 14px;
@@ -438,14 +380,12 @@
       cursor: pointer;
       width: calc(100% - 40px);
     }
-
     .cart-empty {
       padding: 40px 20px;
       text-align: center;
       color: #888;
       font-size: 16px;
     }
-
     .fav-empty {
       padding: 40px 20px;
       text-align: center;
@@ -453,7 +393,6 @@
       font-size: 16px;
       display: none;
     }
-
     .bottom-nav {
       position: fixed;
       bottom: 0;
@@ -466,7 +405,6 @@
       z-index: 200;
       box-shadow: 0 -2px 10px rgba(0,0,0,0.06);
     }
-
     .nav-item {
       flex: 1;
       display: flex;
@@ -479,12 +417,9 @@
       transition: color 0.2s;
       cursor: pointer;
     }
-
     .nav-item.active,
     .nav-item:hover { color: #000000; }
-
     .nav-icon { font-size: 26px; line-height: 1; }
-
     .icon-home {
       position: relative;
       width: 26px;
@@ -509,7 +444,6 @@
       border: 2px solid currentColor;
       border-top: none;
     }
-
     .icon-profile {
       position: relative;
       width: 26px;
@@ -538,7 +472,6 @@
 </head>
 <body>
 
-<!-- LUXURY HEADER -->
 <div class="main-header">
   <div class="logo-container">
     <div class="logo-title">KNIVES A MILLION</div>
@@ -550,29 +483,25 @@
 <div class="search-container">
   <input id="searchInput" type="text" placeholder="Поиск..." />
   <button id="filterBtn">Фильтр</button>
-  
+
   <div id="filterMenu" class="filter-menu">
     <div class="filter-header">Диапазон цен</div>
-    
     <div class="range-inputs">
       <div class="input-group">
         <label>От</label>
         <input type="text" id="minPriceInput" placeholder="0" />
         <span class="rub">₽</span>
       </div>
-      
       <div class="input-group">
         <label>До</label>
         <input type="text" id="maxPriceInput" placeholder="∞" />
         <span class="rub">₽</span>
       </div>
     </div>
-    
     <div class="filter-actions">
       <button id="applyRangeBtn" class="action-btn apply">Применить</button>
       <button id="resetRangeBtn" class="action-btn reset">Сбросить</button>
     </div>
-    
     <div class="quick-ranges">
       <div class="quick-item" data-min="0" data-max="500">До 500 ₽</div>
       <div class="quick-item" data-min="500" data-max="1500">500 – 1 500 ₽</div>
@@ -634,7 +563,6 @@
   </div>
   <div class="nav-item" id="cartNav">
     <div class="nav-icon">
-      <!-- Новая серая SVG-корзина -->
       <svg width="26" height="26" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M6 2L3 6V20C3 20.5304 3.21071 21.0391 3.58579 21.4142C3.96086 21.7893 4.46957 22 5 22H19C19.5304 22 20.0391 21.7893 20.4142 21.4142C20.7893 21.0391 21 20.5304 21 20V6L18 2H6Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
         <path d="M3 6H21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -653,88 +581,93 @@
 </div>
 
 <script>
+// ────────────────────────────────────────────────
+// Данные (отсортированы по id)
 const knives = [
-  {id:"knife1", name:"Ката", price:2500, oldPrice:3200, image:"a.jpg", category:"популярная"},
-  {id:"knife2", name:"Танто", price:1800, oldPrice:2400, image:"b.jpg", category:"хит"},
-  {id:"knife3", name:"Финка", price:2000, oldPrice:null, image:"c.jpg", category:"популярная"},
-  {id:"knife4", name:"Керамбит", price:2200, oldPrice:2900, image:"d.jpg", category:"тактический"},
-  {id:"knife5", name:"Штык-нож", price:3000, oldPrice:3800, image:"e.jpg", category:"тактический"},
-  {id:"knife6", name:"Боуи", price:2800, oldPrice:null, image:"f.jpg", category:"популярная"},
-  {id:"knife7", name:"Сай", price:1500, oldPrice:1890, image:"h.jpg", category:"коллекционный"},
-  {id:"knife8", name:"Широбан", price:2600, oldPrice:3400, image:"g.jpg", category:"новинка"},
-  {id:"knife9", name:"Рейнджер", price:2400, oldPrice:null, image:"h.jpg", category:"тактический"},
+  {id:"axe1", name:"Топор Ивара", price:29800, oldPrice:35900, image:"axe1.jpg", category:"axes"},
+  {id:"bin1", name:"Бинокль 10×42 водозащищённый", price:12400, oldPrice:15800, image:"bin1.jpg", category:"binoculars"},
+  {id:"bin2", name:"Монокуляр 12×50 HD", price:6800, oldPrice:8900, image:"bin2.jpg", category:"binoculars"},
+  {id:"bin3", name:"Бинокль компактный 8×21", price:3200, oldPrice:null, image:"bin3.jpg", category:"binoculars"},
+  {id:"bin4", name:"Бинокль ночного видения 5×40", price:29800, oldPrice:35900, image:"bin4.jpg", category:"binoculars"},
+  {id:"cut1", name:"Филейный нож 180 мм гибкий", price:4900, oldPrice:6200, image:"i.jpg", category:"cutting"},
+  {id:"cut2", name:"Разделочный 250 мм Butcher", price:7800, oldPrice:null, image:"j.jpg", category:"cutting"},
+  {id:"cut3", name:"Слайсер 300 мм", price:6500, oldPrice:8100, image:"v.jpg", category:"cutting"},
+  {id:"cut4", name:"Нож кухонный 18 см", price:5900, oldPrice:null, image:"2.jpg", category:"cutting"},
+  {id:"fl1", name:"Фонарь тактический XHP70 2500 lm", price:4200, oldPrice:5600, image:"hp.jpg", category:"flashlights"},
+  {id:"fl2", name:"Фонарик EDC 1000 lm USB-C", price:1800, oldPrice:2400, image:"ph3.jpg", category:"flashlights"},
+  {id:"fl3", name:"Фонарь 800 lm", price:2600, oldPrice:null, image:"ph4.jpg", category:"flashlights"},
+  {id:"fl4", name:"Фонарь-прожектор 5000 lm", price:8900, oldPrice:11900, image:"ph2.jpg", category:"flashlights"},
+  {id:"k1",  name:"Doppler Phase 4",   price:185000, oldPrice:210000, image:"k1.jpg",  category:"kerambits"},
+  {id:"k2",  name:"Gamma Doppler",     price:238000, oldPrice:265000, image:"k2.jpg",  category:"kerambits"},
+  {id:"k3",  name:"Lore",              price:98000,  oldPrice:125000, image:"k3.jpg",  category:"kerambits"},
+  {id:"k4",  name:"Crimson Web",       price:142000, oldPrice:null,   image:"k4.jpg",  category:"kerambits"},
+  {id:"k5",  name:"Fortran",           price:142000, oldPrice:null,   image:"k5.jpg",  category:"kerambits"},
+  {id:"k6",  name:"Atilla",            price:142000, oldPrice:null,   image:"k6.jpg",  category:"kerambits"},
+  {id:"k7",  name:"Magellan",          price:142000, oldPrice:null,   image:"k7.jpg",  category:"kerambits"},
+  {id:"k8",  name:"Tiki Tiki",         price:142000, oldPrice:null,   image:"k8.jpg",  category:"kerambits"},
+  {id:"k9",  name:"Haisse",            price:142000, oldPrice:null,   image:"k9.jpg",  category:"kerambits"},
+  {id:"k10", name:"Bloom",             price:142000, oldPrice:null,   image:"k10.jpg", category:"kerambits"},
+  {id:"k11", name:"Usada",             price:142000, oldPrice:null,   image:"k11.jpg", category:"kerambits"},
+  {id:"k12", name:"Mazrani",           price:142000, oldPrice:null,   image:"k12.jpg", category:"kerambits"},
+  {id:"kat1",name:"Катана T10 Clay Tempered 104 см", price:28900, oldPrice:34900, image:"kat1.jpg", category:"katana"},
+  {id:"kat2",name:"Katana Samurai Edition",          price:12400, oldPrice:15800, image:"kat2.jpg", category:"katana"},
+  {id:"kat3",name:"Ninja-to 70 см тренировочная",    price:9800,  oldPrice:null,   image:"kat3.jpg", category:"katana"},
+  {id:"kat4",name:"Вакидзаси 60 см",                 price:21800, oldPrice:26900, image:"kat4.jpg", category:"katana"},
+  {id:"kat5",name:"Ninja",                           price:16800, oldPrice:21900, image:"kat5.jpg", category:"katana"},
+  {id:"kn1", name:"Шеф-нож Tojiro DP 210 мм", price:7200,  oldPrice:8900,  image:"e.jpg", category:"kitchen"},
+  {id:"kn2", name:"Сантоку Kai Shun 165 мм",  price:14800, oldPrice:17900, image:"f.jpg", category:"kitchen"},
+  {id:"kn3", name:"Нож для хлеба 230 мм",     price:5200,  oldPrice:null,   image:"g.jpg", category:"kitchen"},
+  {id:"kn4", name:"Универсальный 150 мм VG-10",price:6800, oldPrice:8200,  image:"h.jpg", category:"kitchen"},
+  {id:"kn5", name:"Нож для сыра с вилкой",    price:3400,  oldPrice:4500,  image:"1.jpg", category:"kitchen"},
+  {id:"knife1",  name:"Ката",     price:2500, oldPrice:3200, image:"a.jpg", category:"популярная"},
+  {id:"knife2",  name:"Танто",    price:1800, oldPrice:2400, image:"b.jpg", category:"хит"},
+  {id:"knife3",  name:"Финка",    price:2000, oldPrice:null, image:"c.jpg", category:"популярная"},
+  {id:"knife4",  name:"Керамбит", price:2200, oldPrice:2900, image:"d.jpg", category:"тактический"},
+  {id:"knife5",  name:"Штык-нож", price:3000, oldPrice:3800, image:"e.jpg", category:"тактический"},
+  {id:"knife6",  name:"Боуи",     price:2800, oldPrice:null, image:"f.jpg", category:"популярная"},
+  {id:"knife7",  name:"Сай",      price:1500, oldPrice:1890, image:"h.jpg", category:"коллекционный"},
+  {id:"knife8",  name:"Широбан",  price:2600, oldPrice:3400, image:"g.jpg", category:"новинка"},
+  {id:"knife9",  name:"Рейнджер", price:2400, oldPrice:null, image:"h.jpg", category:"тактический"},
   {id:"knife10", name:"Керамбит Pro", price:3200, oldPrice:4200, image:"i.jpg", category:"хит"},
-  {id:"knife11", name:"Фалькон", price:2100, oldPrice:2700, image:"j.jpg", category:"популярная"},
-  {id:"knife12", name:"Астра", price:2300, oldPrice:null, image:"k.jpg", category:"популярная"},
-  {id:"knife13", name:"Рапира", price:1900, oldPrice:2500, image:"l.jpg", category:"коллекционный"},
-  {id:"knife14", name:"Викинг", price:2700, oldPrice:3500, image:"m.jpg", category:"популярная"},
-  {id:"knife15", name:"Тандер", price:3100, oldPrice:null, image:"n.jpg", category:"новинка"},
-  {id:"knife16", name:"Акула", price:2200, oldPrice:2800, image:"o.jpg", category:"тактический"},
-  {id:"knife17", name:"Барс", price:2600, oldPrice:null, image:"p.jpg", category:"популярная"},
-  {id:"knife18", name:"Тигр", price:2800, oldPrice:3600, image:"q.jpg", category:"хит"},
-  {id:"knife19", name:"Сокол", price:2400, oldPrice:null, image:"r.jpg", category:"новинка"},
-  {id:"knife20", name:"Феникс", price:3200, oldPrice:3990, image:"s.jpg", category:"коллекционный"},
-  {id:"knife21", name:"Дракон", price:3000, oldPrice:3900, image:"u.jpg", category:"хит"},
-  {id:"knife22", name:"Орёл", price:2300, oldPrice:null, image:"v.jpg", category:"популярная"},
-  {id:"knife23", name:"Пантера", price:2700, oldPrice:3400, image:"w.jpg", category:"тактический"},
-  {id:"knife24", name:"Волк", price:2500, oldPrice:3200, image:"x.jpg", category:"коллекционный"},
-  {id:"knife25", name:"Гепард", price:3100, oldPrice:null, image:"y.jpg", category:"новинка"},
-  {id:"knife32", name:"Койот", price:2500, oldPrice:3100, image:"z.jpg", category:"тактический"},
-  {id:"knife33", name:"Медведь", price:3000, oldPrice:3800, image:"k.jpg", category:"хит"},
-  {id:"knife34", name:"Ларс", price:2600, oldPrice:null, image:"1.jpg", category:"популярная"},
-  {id:"knife35", name:"Зигр", price:2800, oldPrice:3600, image:"2.jpg", category:"хит"},
-  {id:"knife36", name:"Токол", price:2400, oldPrice:null, image:"3.jpg", category:"новинка"},
-  {id:"knife37", name:"Зеникс", price:3200, oldPrice:3990, image:"4.jpg", category:"коллекционный"},
+  {id:"knife11", name:"Фалькон",  price:2100, oldPrice:2700, image:"j.jpg", category:"популярная"},
+  {id:"knife12", name:"Астра",    price:2300, oldPrice:null, image:"k.jpg", category:"популярная"},
+  {id:"knife13", name:"Рапира",   price:1900, oldPrice:2500, image:"l.jpg", category:"коллекционный"},
+  {id:"knife14", name:"Викинг",   price:2700, oldPrice:3500, image:"m.jpg", category:"популярная"},
+  {id:"knife15", name:"Тандер",   price:3100, oldPrice:null, image:"n.jpg", category:"новинка"},
+  {id:"knife16", name:"Акула",    price:2200, oldPrice:2800, image:"o.jpg", category:"тактический"},
+  {id:"knife17", name:"Барс",     price:2600, oldPrice:null, image:"p.jpg", category:"популярная"},
+  {id:"knife18", name:"Тигр",     price:2800, oldPrice:3600, image:"q.jpg", category:"хит"},
+  {id:"knife19", name:"Сокол",    price:2400, oldPrice:null, image:"r.jpg", category:"новинка"},
+  {id:"knife20", name:"Феникс",   price:3200, oldPrice:3990, image:"s.jpg", category:"коллекционный"},
+  {id:"knife21", name:"Дракон",   price:3000, oldPrice:3900, image:"u.jpg", category:"хит"},
+  {id:"knife22", name:"Орёл",     price:2300, oldPrice:null, image:"v.jpg", category:"популярная"},
+  {id:"knife23", name:"Пантера",  price:2700, oldPrice:3400, image:"w.jpg", category:"тактический"},
+  {id:"knife24", name:"Волк",     price:2500, oldPrice:3200, image:"x.jpg", category:"коллекционный"},
+  {id:"knife25", name:"Гепард",   price:3100, oldPrice:null, image:"y.jpg", category:"новинка"},
+  {id:"knife32", name:"Койот",    price:2500, oldPrice:3100, image:"z.jpg", category:"тактический"},
+  {id:"knife33", name:"Медведь",  price:3000, oldPrice:3800, image:"k.jpg", category:"хит"},
+  {id:"knife34", name:"Ларс",     price:2600, oldPrice:null, image:"1.jpg", category:"популярная"},
+  {id:"knife35", name:"Зигр",     price:2800, oldPrice:3600, image:"2.jpg", category:"хит"},
+  {id:"knife36", name:"Токол",    price:2400, oldPrice:null, image:"3.jpg", category:"новинка"},
+  {id:"knife37", name:"Зеникс",   price:3200, oldPrice:3990, image:"4.jpg", category:"коллекционный"},
   {id:"knife38", name:"Терракон", price:3000, oldPrice:3900, image:"5.jpg", category:"хит"},
-  {id:"knife39", name:"Порёл", price:2300, oldPrice:null, image:"6.jpg", category:"популярная"},
-  {id:"knife40", name:"Шантера", price:2700, oldPrice:3400, image:"7.jpg", category:"тактический"},
-  {id:"knife41", name:"Холк", price:2500, oldPrice:3200, image:"8.jpg", category:"коллекционный"},
-  {id:"knife42", name:"Пепард", price:3100, oldPrice:null, image:"9.jpg", category:"новинка"},
-  {id:"knife43", name:"Мойот", price:2500, oldPrice:3100, image:"10.jpg", category:"тактический"},
-  {id:"knife44", name:"Чедведь", price:3000, oldPrice:3800, image:"11.jpg", category:"хит"},
-  {id:"knife45", name:"Математик", price:2700, oldPrice:3400, image:"12.jpg", category:"тактический"},
-  {id:"knife46", name:"Резак", price:2500, oldPrice:3200, image:"13.jpg", category:"коллекционный"},
-  {id:"knife47", name:"Правша", price:3100, oldPrice:null, image:"14.jpg", category:"новинка"},
-  {id:"k1",  name:"Doppler Phase 4", price:185000, oldPrice:210000, image:"k1.jpg",    category:"kerambits"},
-  {id:"k2",  name:"Gamma Doppler",  price:238000, oldPrice:265000, image:"k2.jpg",    category:"kerambits"},
-  {id:"k3",  name:"Lore", price:98000,  oldPrice:125000, image:"k3.jpg",    category:"kerambits"},
-  {id:"k4",  name:"Crimson Web", price:142000, oldPrice:null,   image:"k4.jpg",    category:"kerambits"},
-  {id:"k5",  name:"Fortran", price:142000, oldPrice:null,   image:"k5.jpg",    category:"kerambits"},
-  {id:"k6",  name:"Atilla",  price:142000, oldPrice:null,   image:"k6.jpg",    category:"kerambits"},
-  {id:"k7",  name:"Magellan", price:142000, oldPrice:null,   image:"k7.jpg",    category:"kerambits"},
-  {id:"k8",  name:"Tiki Tiki", price:142000, oldPrice:null,   image:"k8.jpg",    category:"kerambits"},
-  {id:"k9",  name:"Haisse", price:142000, oldPrice:null,   image:"k9.jpg",    category:"kerambits"},
-  {id:"k10", name:"Bloom", price:142000, oldPrice:null,   image:"k10.jpg",   category:"kerambits"},
-  {id:"k11", name:"Usada", price:142000, oldPrice:null,   image:"k11.jpg",   category:"kerambits"},
-  {id:"k12", name:"Mazrani", price:142000, oldPrice:null,   image:"k12.jpg",   category:"kerambits"},
-  {id:"kn1", name:"Шеф-нож Tojiro DP 210 мм",      price:7200,   oldPrice:8900,   image:"e.jpg",    category:"kitchen"},
-  {id:"kn2", name:"Сантоку Kai Shun 165 мм",       price:14800,  oldPrice:17900,  image:"f.jpg",    category:"kitchen"},
-  {id:"kn3", name:"Нож для хлеба 230 мм",          price:5200,   oldPrice:null,   image:"g.jpg",    category:"kitchen"},
-  {id:"kn4", name:"Универсальный 150 мм VG-10",    price:6800,   oldPrice:8200,   image:"h.jpg",    category:"kitchen"},
-  {id:"cut1",name:"Филейный нож 180 мм гибкий",    price:4900,   oldPrice:6200,   image:"i.jpg",    category:"cutting"},
-  {id:"cut2",name:"Разделочный 250 мм Butcher",    price:7800,   oldPrice:null,   image:"j.jpg",    category:"cutting"},
-  {id:"cut3",name:"Слайсер 300 мм",                price:6500,   oldPrice:8100,   image:"v.jpg",    category:"cutting"},
-  {id:"kat1",name:"Катана T10 Clay Tempered 104 см",price:28900, oldPrice:34900, image:"kat1.jpg",    category:"katana"},
-  {id:"kat2",name:"Katana Samurai Edition",        price:12400,  oldPrice:15800,  image:"kat2.jpg",    category:"katana"},
-  {id:"kat3",name:"Ninja-to 70 см тренировочная",  price:9800,   oldPrice:null,   image:"kat3.jpg",    category:"katana"},
-  {id:"kat5",name:"Ninja",   price:16800,  oldPrice:21900,  image:"kat5.jpg",    category:"katana"},
-  {id:"set2",name:"Дамасская сталь 5шт",price:9400,  oldPrice:null,   image:"nb2.jpg",    category:"sets"},
-  {id:"stat1",name:"Канцелярский нож металлический",price:1200, oldPrice:1800,  image:"sr.jpg",    category:"stationery"},
-  {id:"stat2",name:"Нож макетный с запасными лезвиями",price:850,oldPrice:null,image:"sr3.jpg",    category:"stationery"},
-  {id:"fl1", name:"Фонарь тактический XHP70 2500 lm",price:4200,oldPrice:5600, image:"hp.jpg",    category:"flashlights"},
-  {id:"fl2", name:"Фонарик EDC 1000 lm USB-C",     price:1800,   oldPrice:2400,   image:"ph3.jpg",    category:"flashlights"},
-  {id:"fl3", name:"Фонарь 800 lm",        price:2600,   oldPrice:null,   image:"ph4.jpg",    category:"flashlights"},
-  {id:"bin1",name:"Бинокль 10×42 водозащищённый",  price:12400,  oldPrice:15800,  image:"bin1.jpg",    category:"binoculars"},
-  {id:"bin2",name:"Монокуляр 12×50 HD",            price:6800,   oldPrice:8900,   image:"bin2.jpg",    category:"binoculars"},
-  {id:"bin3",name:"Бинокль компактный 8×21",       price:3200,   oldPrice:null,   image:"bin3.jpg",    category:"binoculars"},
-  {id:"kn5", name:"Нож для сыра с вилкой",         price:3400,   oldPrice:4500,   image:"1.jpg",    category:"kitchen"},
-  {id:"cut4",name:"Нож кухонный 18 см",        price:5900,   oldPrice:null,   image:"2.jpg",    category:"cutting"},
-  {id:"kat4",name:"Вакидзаси 60 см",               price:21800,  oldPrice:26900,  image:"kat4.jpg",    category:"katana"},
-  {id:"set3",name:"Набор для пикника 8 пр.",       price:11200,  oldPrice:null,   image:"nb1.jpg",    category:"sets"},
-  {id:"fl4", name:"Фонарь-прожектор 5000 lm",      price:8900,   oldPrice:11900,  image:"ph2.jpg",    category:"flashlights"},
-  {id:"bin4",name:"Бинокль ночного видения 5×40",  price:29800,  oldPrice:35900,  image:"bin4.jpg",    category:"binoculars"},
-  {id:"axe1",name:"Топор Ивара",  price:29800,  oldPrice:35900,  image:"axe1.jpg",    category:"axes"},
-];
+  {id:"knife39", name:"Порёл",    price:2300, oldPrice:null, image:"6.jpg", category:"популярная"},
+  {id:"knife40", name:"Шантера",  price:2700, oldPrice:3400, image:"7.jpg", category:"тактический"},
+  {id:"knife41", name:"Холк",     price:2500, oldPrice:3200, image:"8.jpg", category:"коллекционный"},
+  {id:"knife42", name:"Пепард",   price:3100, oldPrice:null, image:"9.jpg", category:"новинка"},
+  {id:"knife43", name:"Мойот",    price:2500, oldPrice:3100, image:"10.jpg", category:"тактический"},
+  {id:"knife44", name:"Чедведь",  price:3000, oldPrice:3800, image:"11.jpg", category:"хит"},
+  {id:"knife45", name:"Математик",price:2700, oldPrice:3400, image:"12.jpg", category:"тактический"},
+  {id:"knife46", name:"Резак",    price:2500, oldPrice:3200, image:"13.jpg", category:"коллекционный"},
+  {id:"knife47", name:"Правша",   price:3100, oldPrice:null, image:"14.jpg", category:"новинка"},
+  {id:"knife48", name:"Левша",   price:3400, oldPrice:null, image:"15.jpg", category:"новинка"},
+  {id:"set2", name:"Дамасская сталь 5шт", price:9400, oldPrice:null, image:"nb2.jpg", category:"sets"},
+  {id:"set3", name:"Набор для пикника 8 пр.", price:11200, oldPrice:null, image:"nb1.jpg", category:"sets"},
+  {id:"stat1",name:"Канцелярский нож металлический", price:1200, oldPrice:1800, image:"sr.jpg", category:"stationery"},
+  {id:"stat2",name:"Нож макетный с запасными лезвиями", price:850, oldPrice:null, image:"sr3.jpg", category:"stationery"}
+].sort((a,b) => a.id.localeCompare(b.id, undefined, {numeric:true}));
+
+// ────────────────────────────────────────────────
 
 const sections = {
   hitsScroll: document.getElementById('hitsScroll'),
@@ -745,22 +678,22 @@ const sections = {
   favoritesScroll: document.getElementById('favoritesScroll')
 };
 
-const searchInput = document.getElementById('searchInput');
-const filterBtn = document.getElementById('filterBtn');
-const filterMenu = document.getElementById('filterMenu');
-const minInput   = document.getElementById('minPriceInput');
-const maxInput   = document.getElementById('maxPriceInput');
-const applyBtn   = document.getElementById('applyRangeBtn');
-const resetBtn   = document.getElementById('resetRangeBtn');
-const cartModal = document.getElementById('cartModal');
-const cartItemsEl = document.getElementById('cartItems');
-const cartTotalEl = document.getElementById('cartTotal');
-const cartClose = document.querySelector('.cart-close');
-const cartNav = document.getElementById('cartNav');
-const checkoutBtn = document.getElementById('checkoutBtn');
-const favSection = document.getElementById('favoritesSection');
-const favEmpty = document.getElementById('favEmpty');
-const favNav = document.getElementById('favNav');
+const searchInput   = document.getElementById('searchInput');
+const filterBtn     = document.getElementById('filterBtn');
+const filterMenu    = document.getElementById('filterMenu');
+const minInput      = document.getElementById('minPriceInput');
+const maxInput      = document.getElementById('maxPriceInput');
+const applyBtn      = document.getElementById('applyRangeBtn');
+const resetBtn      = document.getElementById('resetRangeBtn');
+const cartModal     = document.getElementById('cartModal');
+const cartItemsEl   = document.getElementById('cartItems');
+const cartTotalEl   = document.getElementById('cartTotal');
+const cartClose     = document.querySelector('.cart-close');
+const cartNav       = document.getElementById('cartNav');
+const checkoutBtn   = document.getElementById('checkoutBtn');
+const favSection    = document.getElementById('favoritesSection');
+const favEmpty      = document.getElementById('favEmpty');
+const favNav        = document.getElementById('favNav');
 
 let minPrice = 0;
 let maxPrice = Infinity;
@@ -817,9 +750,7 @@ cartNav.onclick = () => {
 cartClose.onclick = () => cartModal.style.display = 'none';
 cartModal.onclick = e => { if (e.target === cartModal) cartModal.style.display = 'none'; };
 
-checkoutBtn.onclick = () => {
-  alert("Переход к оформлению заказа");
-};
+checkoutBtn.onclick = () => alert("Переход к оформлению заказа");
 
 function toggleFavorite(id) {
   if (favorites.includes(id)) {
@@ -845,17 +776,17 @@ function createCard(item) {
       ${item.oldPrice ? `<div class="old-price">${item.oldPrice.toLocaleString('ru-RU')} ₽</div>` : '<div style="visibility:hidden;"> </div>'}
     </div>
   `;
-
   card.onclick = (e) => {
     if (e.target.closest('.favorite')) return;
     window.location.href = `knife.html?id=${item.id}`;
   };
-
   card.querySelector('.favorite').onclick = (e) => {
     e.stopPropagation();
     toggleFavorite(item.id);
+    const nowFav = favorites.includes(item.id);
+    e.target.textContent = nowFav ? '♥' : '♡';
+    e.target.classList.toggle('active', nowFav);
   };
-
   return card;
 }
 
@@ -871,55 +802,159 @@ function renderFavorites() {
     favEmpty.style.display = 'block';
   } else {
     favEmpty.style.display = 'none';
-    favItems.forEach(item => {
-      sections.favoritesScroll.appendChild(createCard(item));
-    });
+    favItems.forEach(item => sections.favoritesScroll.appendChild(createCard(item)));
   }
+}
+
+// ────────────────────────────────────────────────
+// Функции форматирования (как в категории)
+// ────────────────────────────────────────────────
+
+function formatNumber(num) {
+  return num ? num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ") : '';
+}
+
+function unformatNumber(str) {
+  return parseInt(str.replace(/\s/g, '')) || 0;
+}
+
+// Форматирование при вводе
+[minInput, maxInput].forEach(input => {
+  input.addEventListener('input', e => {
+    let val = unformatNumber(e.target.value);
+    if (!isNaN(val)) {
+      e.target.value = formatNumber(val);
+    }
+  });
+  input.addEventListener('focus', e => {
+    e.target.value = unformatNumber(e.target.value);
+  });
+  input.addEventListener('blur', e => {
+    let val = unformatNumber(e.target.value);
+    e.target.value = val > 0 ? formatNumber(val) : '';
+  });
+});
+
+// Валидация (от > до)
+function validateInputs() {
+  let minV = unformatNumber(minInput.value);
+  let maxV = unformatNumber(maxInput.value);
+  const invalid = minV > maxV && maxV > 0;
+  minInput.classList.toggle('invalid', invalid);
+  maxInput.classList.toggle('invalid', invalid);
+}
+[minInput, maxInput].forEach(inp => inp.addEventListener('input', validateInputs));
+
+function applyPriceFilter() {
+  let minVal = unformatNumber(minInput.value);
+  let maxVal = unformatNumber(maxInput.value);
+
+  if (minVal > maxVal && maxVal > 0) {
+    [minVal, maxVal] = [maxVal, minVal];
+  }
+
+  minPrice = minVal;
+  maxPrice = maxVal > 0 ? maxVal : Infinity;
+
+  updateContent();
+  updateFilterButtonText();
+  filterMenu.style.display = 'none';
+}
+
+applyBtn.onclick = applyPriceFilter;
+
+resetBtn.onclick = () => {
+  minPrice = 0;
+  maxPrice = Infinity;
+  minInput.value = '';
+  maxInput.value = '';
+  updateContent();
+  updateFilterButtonText();
+  filterMenu.style.display = 'none';
+};
+
+document.querySelectorAll('.quick-item').forEach(el => {
+  el.onclick = () => {
+    minPrice = Number(el.dataset.min);
+    maxPrice = Number(el.dataset.max);
+    minInput.value = minPrice === 0 ? '' : formatNumber(minPrice);
+    maxInput.value = maxPrice >= 999999 ? '' : formatNumber(maxPrice);
+    updateContent();
+    updateFilterButtonText();
+    filterMenu.style.display = 'none';
+  };
+});
+
+function updateFilterButtonText() {
+  let text = "Фильтр";
+  let active = false;
+  if (minPrice > 0 || (maxPrice !== Infinity && maxPrice < 9999999)) {
+    active = true;
+    let from = minPrice > 0 ? formatNumber(minPrice) : '';
+    let to = maxPrice !== Infinity ? formatNumber(maxPrice) : '';
+    if (from && to) text = `${from} – ${to} ₽`;
+    else if (from) text = `от ${from} ₽`;
+    else if (to) text = `до ${to} ₽`;
+  }
+  filterBtn.textContent = text;
+  filterBtn.classList.toggle('active', active);
 }
 
 function updateContent() {
   const query = searchInput.value.trim().toLowerCase();
-  const filtered = knives.filter(k =>
-    k.name.toLowerCase().includes(query) &&
-    k.price >= minPrice &&
-    (maxPrice === Infinity || k.price <= maxPrice)
-  );
 
-  renderSection(sections.hitsScroll, filtered.filter(k => k.category === "хит"));
-  renderSection(sections.newScroll, filtered.filter(k => k.category === "новинка"));
-  renderSection(sections.popularScroll, filtered.filter(k => k.category === "популярная"));
+  const filtered = knives.filter(k => {
+    const nameMatch = k.name.toLowerCase().includes(query);
+    const priceMatch = k.price >= minPrice && (maxPrice === Infinity || k.price <= maxPrice);
+    return nameMatch && priceMatch;
+  });
+
+  renderSection(sections.hitsScroll,     filtered.filter(k => k.category === "хит"));
+  renderSection(sections.newScroll,      filtered.filter(k => k.category === "новинка"));
+  renderSection(sections.popularScroll,  filtered.filter(k => k.category === "популярная"));
   renderSection(sections.tacticalScroll, filtered.filter(k => k.category === "тактический"));
-  renderSection(sections.collectScroll, filtered.filter(k => k.category === "коллекционный"));
+  renderSection(sections.collectScroll,  filtered.filter(k => k.category === "коллекционный"));
+
   renderFavorites();
 }
 
+// ────────────────────────────────────────────────
+// События
+// ────────────────────────────────────────────────
+
 searchInput.addEventListener('input', updateContent);
 
-const catalogNav = document.getElementById('catalogNav');
+filterBtn.addEventListener('click', e => {
+  e.stopPropagation();
+  const isVisible = filterMenu.style.display === 'block';
+  filterMenu.style.display = isVisible ? 'none' : 'block';
+  if (!isVisible) {
+    minInput.value = minPrice > 0 ? formatNumber(minPrice) : '';
+    maxInput.value = maxPrice !== Infinity ? formatNumber(maxPrice) : '';
+    validateInputs();
+  }
+});
 
+document.addEventListener('click', e => {
+  if (!filterBtn.contains(e.target) && !filterMenu.contains(e.target)) {
+    filterMenu.style.display = 'none';
+  }
+});
+
+[maxInput, minInput].forEach(inp => {
+  inp.addEventListener('keydown', e => {
+    if (e.key === 'Enter') applyPriceFilter();
+  });
+});
+
+const catalogNav = document.getElementById('catalogNav');
 if (catalogNav) {
-  catalogNav.onclick = function(e) {
-    e.preventDefault();
-    window.location.href = "katalog.html";
-  };
+  catalogNav.onclick = () => window.location.href = "katalog.html";
 }
 
 favNav.onclick = () => {
   favSection.scrollIntoView({ behavior: 'smooth' });
 };
-// Показать/скрыть меню фильтра
-filterBtn.addEventListener('click', function(e) {
-    e.stopPropagation();                    // чтобы клик не закрывал сразу
-    filterMenu.style.display = 
-        filterMenu.style.display === 'block' ? 'none' : 'block';
-});
-
-// Закрываем меню при клике вне его
-document.addEventListener('click', function(e) {
-    if (!filterBtn.contains(e.target) && !filterMenu.contains(e.target)) {
-        filterMenu.style.display = 'none';
-    }
-});
 
 // Инициализация
 updateContent();
