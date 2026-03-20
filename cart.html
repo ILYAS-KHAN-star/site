@@ -1,1 +1,356 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <title>Корзина — KNIVES A MILLION</title>
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #ffffff;
+      color: #111111;
+      min-height: 100vh;
+      padding-bottom: 90px;
+    }
+    .header {
+      position: sticky;
+      top: 0;
+      background: #000;
+      color: #fff;
+      padding: 14px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      z-index: 110;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    }
+    .back-wrapper {
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: transparent;
+      border: 2px solid #ffffff;
+      color: #ffffff;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-size: 26px;
+      font-weight: bold;
+    }
+    .back-wrapper:hover {
+      background: rgba(255,255,255,0.15);
+      transform: translateY(-1px);
+    }
+    .page-title {
+      font-size: 19px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      flex: 1;
+      text-align: center;
+    }
+    .cart-container {
+      padding: 16px;
+    }
+    .cart-item {
+      display: flex;
+      align-items: center;
+      padding: 12px;
+      background: #fff;
+      border: 1px solid #ffffff;
+      border-radius: 14px;
+      margin-bottom: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      transition: transform 0.18s ease, box-shadow 0.18s ease;
+    }
+    .cart-item:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+    }
+    .cart-item-link {
+      display: flex;
+      align-items: center;
+      flex: 1;
+      cursor: pointer;
+      text-decoration: none;
+      color: inherit;
+    }
+    .cart-item img {
+      width: 70px;
+      height: 70px;
+      object-fit: contain;
+      margin-right: 12px;
+      border-radius: 8px;
+      background: #ffffff;
+    }
+    .cart-item-info {
+      flex: 1;
+    }
+    .cart-item-name {
+      font-size: 15px;
+      font-weight: 500;
+      margin-bottom: 4px;
+    }
+    .cart-item-price {
+      font-size: 16px;
+      font-weight: 600;
+      color: #000;
+    }
+    .cart-item-total {
+      font-size: 14px;
+      color: #555;
+      margin-top: 2px;
+    }
+    .remove-btn {
+      background: #000;
+      color: #fff;
+      border: none;
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-size: 13px;
+      cursor: pointer;
+      transition: background 0.2s;
+      margin-left: 12px;
+    }
+    .remove-btn:hover {
+      background: #222;
+    }
+    .cart-summary {
+      position: sticky;
+      bottom: 74px;
+      background: #fff;
+      padding: 16px;
+      border-top: 1px solid #e0e0e0;
+      box-shadow: 0 -2px 10px rgba(0,0,0,0.06);
+      font-size: 18px;
+      font-weight: 600;
+      display: flex;
+      justify-content: space-between;
+      z-index: 100;
+    }
+    .empty-cart {
+      text-align: center;
+      padding: 60px 20px;
+      color: #888;
+      font-size: 18px;
+    }
+    .checkout-btn {
+      margin: 16px;
+      padding: 16px;
+      background: #000;
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      font-size: 17px;
+      font-weight: 600;
+      cursor: pointer;
+      width: calc(100% - 32px);
+      display: block;
+    }
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: #ffffff;
+      border-top: 1px solid #e0e0e0;
+      display: flex;
+      height: 74px;
+      z-index: 200;
+      box-shadow: 0 -2px 10px rgba(0,0,0,0.06);
+    }
+    .nav-item {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      color: #777777;
+      gap: 4px;
+      transition: color 0.2s;
+      cursor: pointer;
+    }
+    .nav-item.active,
+    .nav-item:hover { color: #000000; }
+    .nav-icon { font-size: 26px; line-height: 1; }
+    .icon-home {
+      position: relative;
+      width: 26px;
+      height: 26px;
+    }
+    .icon-home .roof {
+      position: absolute;
+      top: 2px;
+      left: 3px;
+      width: 20px;
+      height: 0;
+      border-left: 10px solid transparent;
+      border-right: 10px solid transparent;
+      border-bottom: 10px solid currentColor;
+    }
+    .icon-home .walls {
+      position: absolute;
+      bottom: 2px;
+      left: 5px;
+      width: 16px;
+      height: 14px;
+      border: 2px solid currentColor;
+      border-top: none;
+    }
+    .icon-profile {
+      position: relative;
+      width: 26px;
+      height: 26px;
+    }
+    .icon-profile .head {
+      position: absolute;
+      top: 2px;
+      left: 8px;
+      width: 10px;
+      height: 10px;
+      border: 2px solid currentColor;
+      border-radius: 50%;
+    }
+    .icon-profile .body {
+      position: absolute;
+      bottom: 2px;
+      left: 5px;
+      width: 16px;
+      height: 14px;
+      border: 2px solid currentColor;
+      border-top: none;
+      border-radius: 0 0 8px 8px;
+    }
+  </style>
+</head>
+<body>
 
+<div class="header">
+  <button class="back-wrapper" onclick="history.back()">←</button>
+  <div class="page-title">Корзина</div>
+</div>
+
+<div class="cart-container" id="cartContainer"></div>
+
+<div class="cart-summary" id="cartSummary" style="display:none;">
+  <span>Итого:</span>
+  <span id="totalPrice">0 ₽</span>
+</div>
+
+<button class="checkout-btn" id="checkoutBtn" style="display:none;">Оформить заказ</button>
+
+<div class="bottom-nav">
+  <div class="nav-item" id="homeNav">
+    <div class="nav-icon icon-home">
+      <div class="roof"></div>
+      <div class="walls"></div>
+    </div>
+    Главная
+  </div>
+  <div class="nav-item" id="catalogNav">
+    <div class="nav-icon">≡</div>
+    Каталог
+  </div>
+  <div class="nav-item active" id="cartNav">
+    <div class="nav-icon">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M6 2L3 6V20C3 20.5304 3.21071 21.0391 3.58579 21.4142C3.96086 21.7893 4.46957 22 5 22H19C19.5304 22 20.0391 21.7893 20.4142 21.4142C20.7893 21.0391 21 20.5304 21 20V6L18 2H6Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M3 6H21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M16 10C16 11.0609 15.5786 12.0783 14.8284 12.8284C14.0783 13.5786 13.0609 14 12 14C10.9391 14 9.92172 13.5786 9.17157 12.8284C8.42143 12.0783 8 11.0609 8 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+    Корзина
+  </div>
+  <div class="nav-item" id="favNav">
+    <div class="nav-icon">♥</div>
+    Избранное
+  </div>
+  <div class="nav-item">
+    <div class="nav-icon icon-profile">
+      <div class="head"></div>
+      <div class="body"></div>
+    </div>
+    Профиль
+  </div>
+</div>
+
+<script>
+function getCart() {
+  return JSON.parse(localStorage.getItem('cart') || '[]');
+}
+
+function saveCart(cart) {
+  localStorage.setItem('cart', JSON.stringify(cart));
+}
+
+function renderCart() {
+  const cart = getCart();
+  const container = document.getElementById('cartContainer');
+  const summary = document.getElementById('cartSummary');
+  const totalEl = document.getElementById('totalPrice');
+  const checkoutBtn = document.getElementById('checkoutBtn');
+
+  container.innerHTML = '';
+
+  if (cart.length === 0) {
+    container.innerHTML = '<div class="empty-cart">Ваша корзина пуста</div>';
+    summary.style.display = 'none';
+    checkoutBtn.style.display = 'none';
+    return;
+  }
+
+  summary.style.display = 'flex';
+  checkoutBtn.style.display = 'block';
+
+  let total = 0;
+
+  cart.forEach(item => {
+    const itemTotal = item.price * item.qty;
+    total += itemTotal;
+
+    const itemDiv = document.createElement('div');
+    itemDiv.className = 'cart-item';
+
+    itemDiv.innerHTML = `
+      <a class="cart-item-link" href="knife.html?id=${item.id}">
+        <img src="static/images/${item.image}" alt="${item.name}">
+        <div class="cart-item-info">
+          <div class="cart-item-name">${item.name}</div>
+          <div class="cart-item-price">${item.price.toLocaleString('ru-RU')} ₽ × ${item.qty}</div>
+          <div class="cart-item-total">= ${itemTotal.toLocaleString('ru-RU')} ₽</div>
+        </div>
+      </a>
+      <button class="remove-btn" data-id="${item.id}">Удалить</button>
+    `;
+
+    container.appendChild(itemDiv);
+  });
+
+  totalEl.textContent = `${total.toLocaleString('ru-RU')} ₽`;
+
+  document.querySelectorAll('.remove-btn').forEach(btn => {
+    btn.onclick = (e) => {
+      e.stopPropagation();
+      let updated = getCart().filter(i => i.id !== btn.dataset.id);
+      saveCart(updated);
+      renderCart();
+    };
+  });
+}
+
+document.getElementById('checkoutBtn').onclick = () => {
+  alert("Переход к оформлению заказа");
+};
+
+document.getElementById('homeNav').onclick = () => window.location.href = 'index.html';
+document.getElementById('catalogNav').onclick = () => window.location.href = 'katalog.html';
+document.getElementById('favNav').onclick = () => window.location.href = 'index.html#favoritesSection';
+
+// Запуск
+renderCart();
+</script>
+</body>
+</html>
