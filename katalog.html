@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-  <title>Каталог</title>
+  <title>Каталог — KNIVES A MILLION</title>
   <style>
     * { margin:0; padding:0; box-sizing:border-box; }
     body {
@@ -141,9 +141,11 @@
   </style>
 </head>
 <body>
+
 <div class="header">
   <div class="header-title">Каталог</div>
 </div>
+
 <div class="categories">
   <div class="category-item" data-category="kerambits">
     <img src="static/images/k1.jpg" class="category-icon" alt="Керамбиты">
@@ -186,11 +188,12 @@
     <div class="arrow">›</div>
   </div>
   <div class="category-item" data-category="axes">
-    <img src="static/images/axe1.jpg" class="category-icon" alt="Бинокли">
+    <img src="static/images/axe1.jpg" class="category-icon" alt="Топоры">
     <div class="category-name">Топоры</div>
     <div class="arrow">›</div>
   </div>
 </div>
+
 <div class="bottom-nav">
   <div class="nav-item" id="homeNav">
     <div class="nav-icon icon-home">
@@ -199,9 +202,13 @@
     </div>
     Главная
   </div>
-  <div class="nav-item active">
+  <div class="nav-item active" id="catalogNav">
     <div class="nav-icon">≡</div>
     Каталог
+  </div>
+  <div class="nav-item" id="favNav">
+    <div class="nav-icon">♥</div>
+    Избранное
   </div>
   <div class="nav-item" id="cartNav">
     <div class="nav-icon">
@@ -233,6 +240,14 @@ document.querySelectorAll('.category-item').forEach(item => {
 
 document.getElementById('homeNav').onclick = () => {
   window.location.href = 'index.html';
+};
+
+document.getElementById('favNav').onclick = () => {
+  window.location.href = 'index.html#favoritesSection';
+};
+
+document.getElementById('cartNav').onclick = () => {
+  window.location.href = 'cart.html';
 };
 </script>
 </body>
