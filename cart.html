@@ -4,6 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
   <title>Корзина — KNIVES A MILLION</title>
+
+  <!-- EmailJS SDK -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
   <style>
     * { margin:0; padding:0; box-sizing:border-box; }
     body {
@@ -26,202 +30,180 @@
       box-shadow: 0 2px 10px rgba(0,0,0,0.3);
     }
     .back-wrapper {
-      width: 44px;
-      height: 44px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      width: 44px; height: 44px;
+      display: flex; align-items: center; justify-content: center;
       background: transparent;
       border: 2px solid #ffffff;
       color: #ffffff;
       border-radius: 10px;
       cursor: pointer;
       transition: all 0.2s;
-      font-size: 26px;
-      font-weight: bold;
+      font-size: 26px; font-weight: bold;
     }
     .back-wrapper:hover {
       background: rgba(255,255,255,0.15);
       transform: translateY(-1px);
     }
     .page-title {
-      font-size: 19px;
-      font-weight: 600;
+      font-size: 19px; font-weight: 600;
       letter-spacing: 0.5px;
-      flex: 1;
-      text-align: center;
+      flex: 1; text-align: center;
     }
-    .cart-container {
-      padding: 16px;
-    }
+    .cart-container { padding: 16px; }
     .cart-item {
-      display: flex;
-      align-items: center;
+      display: flex; align-items: center;
       padding: 12px;
       background: #fff;
-      border: 1px solid #ffffff;
+      border: 1px solid #e0e0e0;
       border-radius: 14px;
       margin-bottom: 12px;
       box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-      transition: transform 0.18s ease, box-shadow 0.18s ease;
+      transition: all 0.18s ease;
     }
     .cart-item:hover {
       transform: translateY(-2px);
       box-shadow: 0 6px 16px rgba(0,0,0,0.1);
     }
     .cart-item-link {
-      display: flex;
-      align-items: center;
-      flex: 1;
-      cursor: pointer;
-      text-decoration: none;
-      color: inherit;
+      display: flex; align-items: center; flex: 1;
+      cursor: pointer; text-decoration: none; color: inherit;
     }
     .cart-item img {
-      width: 70px;
-      height: 70px;
-      object-fit: contain;
-      margin-right: 12px;
-      border-radius: 8px;
-      background: #ffffff;
+      width: 70px; height: 70px;
+      object-fit: contain; margin-right: 12px;
+      border-radius: 8px; background: #f8f8f8;
     }
-    .cart-item-info {
-      flex: 1;
-    }
-    .cart-item-name {
-      font-size: 15px;
-      font-weight: 500;
-      margin-bottom: 4px;
-    }
-    .cart-item-price {
-      font-size: 16px;
-      font-weight: 600;
-      color: #000;
-    }
-    .cart-item-total {
-      font-size: 14px;
-      color: #555;
-      margin-top: 2px;
-    }
+    .cart-item-info { flex: 1; }
+    .cart-item-name { font-size: 15px; font-weight: 500; margin-bottom: 4px; }
+    .cart-item-price { font-size: 16px; font-weight: 600; color: #000; }
+    .cart-item-total { font-size: 14px; color: #555; margin-top: 2px; }
     .remove-btn {
-      background: #000;
-      color: #fff;
-      border: none;
-      padding: 8px 14px;
-      border-radius: 8px;
-      font-size: 13px;
-      cursor: pointer;
+      background: #000; color: #fff; border: none;
+      padding: 8px 14px; border-radius: 8px;
+      font-size: 13px; cursor: pointer;
       transition: background 0.2s;
       margin-left: 12px;
     }
-    .remove-btn:hover {
-      background: #222;
-    }
+    .remove-btn:hover { background: #222; }
     .cart-summary {
-      position: sticky;
-      bottom: 74px;
-      background: #fff;
-      padding: 16px;
+      position: sticky; bottom: 74px;
+      background: #fff; padding: 16px;
       border-top: 1px solid #e0e0e0;
       box-shadow: 0 -2px 10px rgba(0,0,0,0.06);
-      font-size: 18px;
-      font-weight: 600;
-      display: flex;
-      justify-content: space-between;
+      font-size: 18px; font-weight: 600;
+      display: flex; justify-content: space-between;
       z-index: 100;
     }
     .empty-cart {
-      text-align: center;
-      padding: 60px 20px;
-      color: #888;
-      font-size: 18px;
+      text-align: center; padding: 60px 20px;
+      color: #888; font-size: 18px;
     }
     .checkout-btn {
-      margin: 16px;
-      padding: 16px;
+      margin: 16px; padding: 16px;
+      background: #000; color: #fff; border: none;
+      border-radius: 12px; font-size: 17px; font-weight: 600;
+      cursor: pointer; width: calc(100% - 32px); display: block;
+    }
+
+    /* Модальное окно */
+    .modal {
+      display: none;
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,0.75);
+      z-index: 1000;
+      align-items: center; justify-content: center;
+      padding: 20px;
+    }
+    .modal-content {
       background: #000;
       color: #fff;
-      border: none;
-      border-radius: 12px;
-      font-size: 17px;
-      font-weight: 600;
-      cursor: pointer;
-      width: calc(100% - 32px);
-      display: block;
+      border-radius: 16px;
+      width: 100%; max-width: 420px;
+      padding: 24px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.7);
+      position: relative;
     }
+    .modal-close {
+      position: absolute; top: 16px; right: 20px;
+      font-size: 28px; cursor: pointer; color: #aaa;
+    }
+    .modal-close:hover { color: #fff; }
+    .modal h2 {
+      font-size: 22px; margin-bottom: 20px;
+      text-align: center; letter-spacing: 0.5px;
+    }
+    .form-group {
+      margin-bottom: 16px;
+    }
+    .form-group label {
+      display: block; margin-bottom: 6px;
+      font-size: 14px; color: #ccc;
+    }
+    .form-group input {
+      width: 100%; padding: 12px 14px;
+      background: #111; border: 1px solid #333;
+      border-radius: 10px; color: #fff;
+      font-size: 16px;
+    }
+    .form-group input:focus {
+      outline: none; border-color: #555; box-shadow: 0 0 0 2px rgba(255,255,255,0.1);
+    }
+    .submit-btn {
+      width: 100%; padding: 14px;
+      background: #fff; color: #000;
+      border: none; border-radius: 12px;
+      font-size: 17px; font-weight: 600;
+      cursor: pointer; margin-top: 12px;
+      transition: all 0.2s;
+    }
+    .submit-btn:hover { background: #ddd; }
+    .submit-btn:disabled {
+      background: #333; color: #777; cursor: not-allowed;
+    }
+    .form-message {
+      margin-top: 12px; text-align: center;
+      font-size: 14px; min-height: 20px;
+    }
+    .success { color: #4caf50; }
+    .error { color: #ff6b6b; }
+
     .bottom-nav {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      background: #ffffff;
-      border-top: 1px solid #e0e0e0;
-      display: flex;
-      height: 74px;
-      z-index: 200;
+      position: fixed; bottom: 0; left: 0; right: 0;
+      background: #ffffff; border-top: 1px solid #e0e0e0;
+      display: flex; height: 74px; z-index: 200;
       box-shadow: 0 -2px 10px rgba(0,0,0,0.06);
     }
     .nav-item {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      font-size: 11px;
-      color: #777777;
-      gap: 4px;
-      transition: color 0.2s;
-      cursor: pointer;
+      flex: 1; display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      font-size: 11px; color: #777777; gap: 4px;
+      transition: color 0.2s; cursor: pointer;
     }
-    .nav-item.active,
-    .nav-item:hover { color: #000000; }
+    .nav-item.active, .nav-item:hover { color: #000000; }
     .nav-icon { font-size: 26px; line-height: 1; }
-    .icon-home {
-      position: relative;
-      width: 26px;
-      height: 26px;
-    }
+    .icon-home { position: relative; width: 26px; height: 26px; }
     .icon-home .roof {
-      position: absolute;
-      top: 2px;
-      left: 3px;
-      width: 20px;
-      height: 0;
+      position: absolute; top: 2px; left: 3px;
+      width: 0; height: 0;
       border-left: 10px solid transparent;
       border-right: 10px solid transparent;
       border-bottom: 10px solid currentColor;
     }
     .icon-home .walls {
-      position: absolute;
-      bottom: 2px;
-      left: 5px;
-      width: 16px;
-      height: 14px;
-      border: 2px solid currentColor;
-      border-top: none;
+      position: absolute; bottom: 2px; left: 5px;
+      width: 16px; height: 14px;
+      border: 2px solid currentColor; border-top: none;
     }
-    .icon-profile {
-      position: relative;
-      width: 26px;
-      height: 26px;
-    }
+    .icon-profile { position: relative; width: 26px; height: 26px; }
     .icon-profile .head {
-      position: absolute;
-      top: 2px;
-      left: 8px;
-      width: 10px;
-      height: 10px;
-      border: 2px solid currentColor;
-      border-radius: 50%;
+      position: absolute; top: 2px; left: 8px;
+      width: 10px; height: 10px;
+      border: 2px solid currentColor; border-radius: 50%;
     }
     .icon-profile .body {
-      position: absolute;
-      bottom: 2px;
-      left: 5px;
-      width: 16px;
-      height: 14px;
-      border: 2px solid currentColor;
-      border-top: none;
+      position: absolute; bottom: 2px; left: 5px;
+      width: 16px; height: 14px;
+      border: 2px solid currentColor; border-top: none;
       border-radius: 0 0 8px 8px;
     }
   </style>
@@ -242,17 +224,48 @@
 
 <button class="checkout-btn" id="checkoutBtn" style="display:none;">Оформить заказ</button>
 
+<!-- Модальное окно -->
+<div class="modal" id="orderModal">
+  <div class="modal-content">
+    <span class="modal-close" onclick="closeModal()">×</span>
+    <h2>Оформление заказа</h2>
+
+    <form id="orderForm" novalidate>
+      <div class="form-group">
+        <label for="name">Имя *</label>
+        <input type="text" id="name" name="name" required placeholder="Введите имя">
+      </div>
+      <div class="form-group">
+        <label for="surname">Фамилия *</label>
+        <input type="text" id="surname" name="surname" required placeholder="Введите фамилию">
+      </div>
+      <div class="form-group">
+        <label for="phone">Телефон *</label>
+        <input type="tel" id="phone" name="phone" required placeholder="+7 (___) ___-__-__" pattern=".{7,}" title="Минимум 7 символов">
+      </div>
+      <div class="form-group">
+        <label for="telegram">Ник в Telegram (необязательно)</label>
+        <input type="text" id="telegram" name="telegram" placeholder="@username">
+      </div>
+
+      <button type="submit" class="submit-btn" id="submitOrder">Отправить заказ</button>
+      <div class="form-message" id="formMessage"></div>
+    </form>
+  </div>
+</div>
+
 <div class="bottom-nav">
   <div class="nav-item" id="homeNav">
-    <div class="nav-icon icon-home">
-      <div class="roof"></div>
-      <div class="walls"></div>
-    </div>
+    <div class="nav-icon icon-home"><div class="roof"></div><div class="walls"></div></div>
     Главная
   </div>
   <div class="nav-item" id="catalogNav">
     <div class="nav-icon">≡</div>
     Каталог
+  </div>
+  <div class="nav-item" id="favNav">
+    <div class="nav-icon">♥</div>
+    Избранное
   </div>
   <div class="nav-item active" id="cartNav">
     <div class="nav-icon">
@@ -264,20 +277,21 @@
     </div>
     Корзина
   </div>
-  <div class="nav-item" id="favNav">
-    <div class="nav-icon">♥</div>
-    Избранное
-  </div>
   <div class="nav-item">
-    <div class="nav-icon icon-profile">
-      <div class="head"></div>
-      <div class="body"></div>
-    </div>
+    <div class="nav-icon icon-profile"><div class="head"></div><div class="body"></div></div>
     Профиль
   </div>
 </div>
 
 <script>
+// Инициализация EmailJS — твои ключи здесь
+emailjs.init({
+  publicKey: "fHabubQSejQz6vKA7"   // ← твой открытый ключ (Public Key)
+});
+
+const SERVICE_ID   = "shoppy_mail";           // ← ← ← ЗАМЕНИ НА СВОЙ Service ID !!!
+const TEMPLATE_ID  = "template_xn3ldvb";          // ← ← ← ЗАМЕНИ НА СВОЙ Template ID !!!
+
 function getCart() {
   return JSON.parse(localStorage.getItem('cart') || '[]');
 }
@@ -306,10 +320,12 @@ function renderCart() {
   checkoutBtn.style.display = 'block';
 
   let total = 0;
+  let cartText = "";
 
   cart.forEach(item => {
     const itemTotal = item.price * item.qty;
     total += itemTotal;
+    cartText += `• ${item.name} × ${item.qty} шт. = ${itemTotal.toLocaleString('ru-RU')} ₽\n`;
 
     const itemDiv = document.createElement('div');
     itemDiv.className = 'cart-item';
@@ -331,6 +347,8 @@ function renderCart() {
 
   totalEl.textContent = `${total.toLocaleString('ru-RU')} ₽`;
 
+  window.currentOrder = { cartText, total };
+
   document.querySelectorAll('.remove-btn').forEach(btn => {
     btn.onclick = (e) => {
       e.stopPropagation();
@@ -341,10 +359,74 @@ function renderCart() {
   });
 }
 
-document.getElementById('checkoutBtn').onclick = () => {
-  alert("Переход к оформлению заказа");
+// Модалка
+const modal = document.getElementById('orderModal');
+const form = document.getElementById('orderForm');
+const messageEl = document.getElementById('formMessage');
+const submitBtn = document.getElementById('submitOrder');
+
+function openModal() {
+  if (getCart().length === 0) {
+    alert("Корзина пуста");
+    return;
+  }
+  modal.style.display = 'flex';
+  messageEl.textContent = '';
+  form.reset();
+}
+
+function closeModal() {
+  modal.style.display = 'none';
+  messageEl.textContent = '';
+}
+
+document.getElementById('checkoutBtn').onclick = openModal;
+document.querySelector('.modal-close').onclick = closeModal;
+
+// Отправка формы
+form.onsubmit = async (e) => {
+  e.preventDefault();
+
+  if (!form.checkValidity()) {
+    messageEl.textContent = 'Заполните все обязательные поля';
+    messageEl.className = 'form-message error';
+    return;
+  }
+
+  submitBtn.disabled = true;
+  messageEl.textContent = 'Отправка...';
+  messageEl.className = 'form-message';
+
+  const formData = new FormData(form);
+  const data = {
+    name: formData.get('name'),
+    surname: formData.get('surname'),
+    phone: formData.get('phone'),
+    telegram: formData.get('telegram') || 'не указан',
+    cart_content: window.currentOrder?.cartText || 'корзина не загружена',
+    total: window.currentOrder?.total?.toLocaleString('ru-RU') || '0',
+    time: new Date().toLocaleString('ru-RU')
+  };
+
+  try {
+    await emailjs.send(SERVICE_ID, TEMPLATE_ID, data);
+    messageEl.textContent = 'Заказ успешно отправлен! Спасибо!';
+    messageEl.className = 'form-message success';
+    setTimeout(() => {
+      closeModal();
+      // localStorage.removeItem('cart');   // раскомментировать, если хочешь очищать корзину после заказа
+      // renderCart();
+    }, 2200);
+  } catch (err) {
+    console.error(err);
+    messageEl.textContent = 'Ошибка отправки. Попробуйте позже.';
+    messageEl.className = 'form-message error';
+  } finally {
+    submitBtn.disabled = false;
+  }
 };
 
+// Навигация
 document.getElementById('homeNav').onclick = () => window.location.href = 'index.html';
 document.getElementById('catalogNav').onclick = () => window.location.href = 'katalog.html';
 document.getElementById('favNav').onclick = () => window.location.href = 'index.html#favoritesSection';
